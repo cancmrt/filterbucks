@@ -21,7 +21,7 @@ Or you can access directly by browser:
 
 Our current version is 1.0.2 so link should be :
 
-    https://unpkg.com/filterbucks@1.0.1/filterbucks.min.js
+    https://unpkg.com/filterbucks@1.0.2/filterbucks.min.js
 
 
 ## **How filterbucks working?**
