@@ -11,6 +11,19 @@ Filterbucks working with many Html elements with include hierarchical filter or 
  - Button
  -  A
 
+You can access filterbucks using:
+
+    npm install filterbucks
+
+Or you can access directly by browser:
+
+    https://unpkg.com/filterbucks@1.0.x/filterbucks.min.js
+
+Our current version is 1.0.2 so link should be :
+
+    https://unpkg.com/filterbucks@1.0.1/filterbucks.min.js
+
+
 ## **How filterbucks working?**
 
 Filterbucks working with html element's class attribute. You should put filter key values in class attribute and then build your filter element for choose filter, that's it, filterbucks handle the rest of operations.
@@ -149,7 +162,8 @@ This element value should be numeric and value range can be 0 to n.
 
 This property looking filter element level and deactivate this level. This element value can be true or false. If you are using true, selected filter element level will be deactivate.
 
-Other important notes.
+> **Other important notes.**
+
 Every filter element should include this attributes inside options or inside element itself. 
 
  - data-fbdeep: For choose value filter level
