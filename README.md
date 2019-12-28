@@ -33,15 +33,15 @@ Filterbucks working with html element's class attribute. You should put filter k
 This is easy peasy situation. For example you decide to filter videos by selection in your page. Take every video attribute or parent div etc, put class attribute that element, inside of class attribute first write "filterbucks" keyword, this will tell the plugin which elements filterable on page and then write your keyword for filters by using space.
 For example:
 
-    <div  class="filterbucks America InDoor">
+    <div  class="filterbucks Ford Speed">
     
-	    <h1>America InDoor</h1>
+	    <h1>Ford Speed</h1>
     
     </div>
 
-    <div  class="filterbucks Turkey OutDoor">
+    <div  class="filterbucks Opel Comfort">
     
-	    <h1>Turkey Outdoor</h1>
+	    <h1>Opel Comfort</h1>
     
     </div>
     
@@ -62,11 +62,11 @@ If you understand this attributes, rest of operations too easy just put them pro
 	    <option data-fbflush="true" value="none">
 		    Select
 	    </option>
-	    <option value="America">
-		    America
+	    <option value="Ford">
+		    Ford
 	    </option>
-	    <option value="Turkey">
-		    Turkey
+	    <option value="Opel">
+		    Opel
 	    </option>
     </select>
     
@@ -74,11 +74,11 @@ If you understand this attributes, rest of operations too easy just put them pro
 	    <option data-fbflush="true" value="none">
 		    Select
 	    </option>
-	    <option value="InDoor">
-		    InDoor
+	    <option value="Speed">
+		    Speed
 	    </option>
-	    <option value="OutDoor">
-		    OutDoor
+	    <option value="Comfort">
+		    Comfort
 	    </option>
     </select>
 
@@ -87,9 +87,9 @@ If you understand this attributes, rest of operations too easy just put them pro
 
     <input type="checkbox" class="filter" data-fbdeep="0" name="filter1" value="none" data-fbflush="true"/>None
     
-    <input type="checkbox" class="filter" data-fbdeep="0" name="filter1" value="America"/>America
+    <input type="checkbox" class="filter" data-fbdeep="0" name="filter1" value="Ford"/>Ford
     
-    <input type="checkbox" class="filter" data-fbdeep="0" name="filter1" value="Turkey"/>Turkey
+    <input type="checkbox" class="filter" data-fbdeep="0" name="filter1" value="Opel"/>Opel
     
     <br/>
     
@@ -97,17 +97,17 @@ If you understand this attributes, rest of operations too easy just put them pro
     
     <input type="checkbox" class="filter" data-fbdeep="1" name="filter2" value="none" data-fbflush="true" />None
     
-    <input type="checkbox" class="filter" data-fbdeep="1" name="filter2" value="InDoor"/>InDoor
+    <input type="checkbox" class="filter" data-fbdeep="1" name="filter2" value="Speed"/>Speed
     
-    <input type="checkbox" class="filter" data-fbdeep="1" name="filter2" value="OutDoor"/>OutDoor
+    <input type="checkbox" class="filter" data-fbdeep="1" name="filter2" value="Comfort"/>Comfort
 
 **Example for buttons:**
 
     <button class="filter btn btn-primary" data-fbdeep="0" data-fbflush="true" value="none">None</button>
     
-    <button class="filter btn btn-primary" data-fbdeep="0" value="America">America</button>
+    <button class="filter btn btn-primary" data-fbdeep="0" value="Ford">Ford</button>
     
-    <button class="filter btn btn-primary" data-fbdeep="0" name="filter1" value="Turkey">Turkey</button>
+    <button class="filter btn btn-primary" data-fbdeep="0" name="filter1" value="Opel">Opel</button>
     
     <br/>
     
@@ -115,18 +115,18 @@ If you understand this attributes, rest of operations too easy just put them pro
     
     <button class="filter btn btn-primary" data-fbdeep="1" data-fbflush="true" value="none">None</button>
     
-    <button class="filter btn btn-primary" data-fbdeep="1" value="InDoor">InDoor</button>
+    <button class="filter btn btn-primary" data-fbdeep="1" value="Speed">Speed</button>
     
-    <button class="filter btn btn-primary" data-fbdeep="1" value="OutDoor">OutDoor</button>
+    <button class="filter btn btn-primary" data-fbdeep="1" value="Comfort">Comfort</button>
 
 
 **Example for a tag:**
 
     <a href="#" class="filter btn btn-primary" data-fbdeep="0" data-fbflush="true" value="none">None</a>
     
-    <a href="#" class="filter btn btn-primary" data-fbdeep="0" value="America">America</a>
+    <a href="#" class="filter btn btn-primary" data-fbdeep="0" value="Ford">Ford</a>
     
-    <a href="#" class="filter btn btn-primary" data-fbdeep="0" value="Canada">Canada</a>
+    <a href="#" class="filter btn btn-primary" data-fbdeep="0" value="Opel">Opel</a>
     
     <br/>
     
@@ -134,9 +134,9 @@ If you understand this attributes, rest of operations too easy just put them pro
     
     <a href="#" class="filter btn btn-primary" data-fbdeep="1" data-fbflush="true" value="none">None</a>
     
-    <a href="#" class="filter btn btn-primary" data-fbdeep="1" value="InDoor">InDoor</a>
+    <a href="#" class="filter btn btn-primary" data-fbdeep="1" value="Speed">Speed</a>
     
-    <a href="#" class="filter btn btn-primary" data-fbdeep="1" value="OutDoor">OutDoor</a>
+    <a href="#" class="filter btn btn-primary" data-fbdeep="1" value="Comfort">Comfort</a>
 
 After creation of filter selector put jQuery and Filterbucks.js top of the page. 
 And write these between script tags
