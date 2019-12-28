@@ -50,8 +50,8 @@ function filterbucksEngine(event) {
 
     var possibleQueries = deepQueryCreator(baseConfiguration, deepElements);
     if(baseConfiguration.extraConfiguration 
-        && baseConfiguration.extraConfiguration.HideFilterToo 
-        && baseConfiguration.extraConfiguration.HideFilterToo === true)
+        && baseConfiguration.extraConfiguration.HideUnrelateds 
+        && baseConfiguration.extraConfiguration.HideUnrelateds === true)
     {
         filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeeps, possibleQueries);
     }

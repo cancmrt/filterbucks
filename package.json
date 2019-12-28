@@ -1,6 +1,6 @@
 {
   "name": "filterbucks",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Filterbucks is JQuery plugin which blazingly fast for filter operations based on using class selectors.",
   "main": "filterbucks.js",
   "scripts": {
