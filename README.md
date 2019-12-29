@@ -296,3 +296,19 @@ Every filter element should include this attributes inside options or inside ele
 Optional Parameters:
 
 - data-fbflush: This attribute using for deactivate selected filter level
+
+
+> **Somehow hide and show options maybe cannot be work cause of other css
+> and javascript files.**
+
+ **Filterbucks put some classes on hiding and showing elements.**
+
+**On filtered Elements:**
+
+ - filtebucksFilteredHide class added on hiding elements
+ - filtebucksFilteredShow class added on showing elements
+
+**On related filter elements:**
+
+ - filterbuckRelatedHide class added on hiding elements
+ - filterbuckRelatedShow class added on showing elements

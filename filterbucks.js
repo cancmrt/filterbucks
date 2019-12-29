@@ -57,7 +57,12 @@ function filterbucksEngine(event) {
     }
     var classQuery = possibleQueryGenerator(baseConfiguration, possibleQueries);
     jQuery(baseConfiguration.baseClass).css("display", "none");
+    jQuery(baseConfiguration.baseClass).removeClass(baseConfiguration.filterShowClass);
+    jQuery(baseConfiguration.baseClass).removeClass(baseConfiguration.filterHideClass);
+    jQuery(baseConfiguration.baseClass).addClass(baseConfiguration.filterHideClass);
     jQuery(classQuery).css("display", "");
+    jQuery(classQuery).removeClass(baseConfiguration.filterHideClass);
+    jQuery(classQuery).addClass(baseConfiguration.filterShowClass);
 
 }
 function possibleQueryGenerator(baseConfiguration, possibleQueries) {
@@ -85,6 +90,9 @@ function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeep
         if (baseConfiguration.type == "select") {
             var unSortedDeep = jQuery(baseConfiguration.parents).filter("[data-" + baseConfiguration.dataDeepProp + "='" + discoverThisDeep + "']");
             jQuery(unSortedDeep).find("option").each(function () {
+                jQuery(this).removeClass(baseConfiguration.relatedFilterShowClass);
+                jQuery(this).removeClass(baseConfiguration.relatedFilterHideClass);
+                jQuery(this).addClass(baseConfiguration.relatedFilterShowClass);
                 jQuery(this).show();
             });
             var selectedElement = jQuery(eventFocusItem).find(baseConfiguration.checkSelector);
@@ -101,6 +109,9 @@ function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeep
                             }
                         });
                         if (!findedAny) {
+                            jQuery(this).removeClass(baseConfiguration.relatedFilterShowClass);
+                            jQuery(this).removeClass(baseConfiguration.relatedFilterHideClass);
+                            jQuery(this).addClass(baseConfiguration.relatedFilterHideClass);
                             jQuery(this).hide();
                         }
                         findedAny = false;
@@ -218,6 +229,10 @@ jQuery.fn.filterbucks = function (extraConfiguration) {
         checkSelector: ":checked",
         buttonCheckSelector: "clicked",
         event: "change",
+        relatedFilterShowClass: "filterbucksRelatedShow",
+        relatedFilterHideClass: "filterbucksRelatedHide",
+        filterShowClass:"filtebucksFilteredShow",
+        filterHideClass:"filtebucksFilteredHide",
         type: jQuery(this)[0].tagName == "INPUT" ? jQuery(this)[0].type.toLowerCase() : jQuery(this)[0].tagName.toLowerCase(),
         extraConfiguration:extraConfiguration
     }
