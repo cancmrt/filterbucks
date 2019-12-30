@@ -181,8 +181,7 @@ Comfort
 
 **Example for a tag:**
 
-  
-
+```html
 <a href="#" class="filter btn btn-primary" data-fbdeep="0" data-fbflush="true" value="none">None</a>
 
 <a href="#" class="filter btn btn-primary" data-fbdeep="0" value="Ford">Ford</a>
@@ -199,7 +198,7 @@ Comfort
 
 <a href="#" class="filter btn btn-primary" data-fbdeep="1" value="Comfort">Comfort</a>
 
-  
+```
 
 After creation of filter selector put jQuery and Filterbucks.js top of the page.
 
