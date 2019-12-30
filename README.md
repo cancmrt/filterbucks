@@ -58,24 +58,15 @@ Filterbucks working with html element's class attribute. You should put filter k
 This is easy peasy situation. For example you decide to filter videos by selection in your page. Take every video attribute or parent div etc, put class attribute that element, inside of class attribute first write "filterbucks" keyword, this will tell the plugin which elements filterable on page and then write your keyword for filters by using space.
 
 For example:
-
-  
-
+```html
 <div class="filterbucks Ford Speed">
-
 <h1>Ford Speed</h1>
-
 </div>
-
-  
 
 <div class="filterbucks Opel Comfort">
-
 <h1>Opel Comfort</h1>
-
 </div>
-
-  
+```
 
 ## **How can I build filter selector?**
 
@@ -98,8 +89,7 @@ If you understand this attributes, rest of operations too easy just put them pro
   
 
 **Examples for select(same on multiple select just put multiple attribute on select tag):**
-
-  
+```html
 
 <select class="filter" data-fbdeep="0">
 
@@ -145,13 +135,11 @@ Comfort
 
 </select>
 
-  
-  
+```
 
 **Example for checkbox(same on radio just change type attribute to radio):**
 
-  
-
+```html
 <input type="checkbox" class="filter" data-fbdeep="0" name="filter1" value="none" data-fbflush="true"/>None
 
 <input type="checkbox" class="filter" data-fbdeep="0" name="filter1" value="Ford"/>Ford
@@ -167,13 +155,12 @@ Comfort
 <input type="checkbox" class="filter" data-fbdeep="1" name="filter2" value="Speed"/>Speed
 
 <input type="checkbox" class="filter" data-fbdeep="1" name="filter2" value="Comfort"/>Comfort
+```
 
-  
 
 **Example for buttons:**
 
-  
-
+```html
 <button class="filter btn btn-primary" data-fbdeep="0" data-fbflush="true" value="none">None</button>
 
 <button class="filter btn btn-primary" data-fbdeep="0" value="Ford">Ford</button>
@@ -189,9 +176,8 @@ Comfort
 <button class="filter btn btn-primary" data-fbdeep="1" value="Speed">Speed</button>
 
 <button class="filter btn btn-primary" data-fbdeep="1" value="Comfort">Comfort</button>
+```
 
-  
-  
 
 **Example for a tag:**
 
@@ -219,8 +205,7 @@ After creation of filter selector put jQuery and Filterbucks.js top of the page.
 
 And write these between script tags
 
-  
-
+```html
 <script>
 
 jQuery(document).ready(function(){
@@ -230,6 +215,7 @@ $(".filter1").filterbucks();
 });
 
 </script>
+```
 
 That's it !
 
@@ -237,17 +223,14 @@ That's it !
 
 Okey if you want hide unrelated filter based on your selection, this is so easy on filterbucks!
 
-    jQuery(document).ready(function(){
-    
+```javascript
+jQuery(document).ready(function(){
 	    $(".filter1").filterbucks({
-	    
 		    HideUnrelateds:true
-	    
 	    });
-    
-    });
+ });
+```
 
- 
 
 Let me explain to you, You have Ford and Opel both of them Speed and Comfort model but somehow Ford have one more model, let's say that model name is Extreme. Opel definitely doesn't have this model, when we select Opel option, Model options filtered too and Extreme option will be deleted! When we select Ford again, Extreme option will come again.
 
