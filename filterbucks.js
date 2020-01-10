@@ -32,6 +32,23 @@ function filterbucksEngine(event) {
         return index === self.indexOf(elem);
     });
     uniqueDeeps = uniqueDeeps.sort(function (a, b) { return a - b });
+	
+	var deepCount = parseInt(jQuery(eventFocusItem).data(baseConfiguration.dataDeepProp), 10);
+	uniqueDeeps.forEach(deep =>{
+		
+		if(deepCount < deep){
+			var flushThis = jQuery(baseConfiguration.parents).filter("[data-" + baseConfiguration.dataDeepProp + "='" + deep + "']");
+			
+			if (baseConfiguration.type == "select") {
+				jQuery(flushThis).val($(this).find('option:first').val());
+			}
+			
+			
+		}
+	});
+	
+	
+	
     var deepElements = [];
     uniqueDeeps.forEach(deep => {
 
@@ -47,8 +64,13 @@ function filterbucksEngine(event) {
             deepElements.push(findedDeep);
         }
     });
-
+	
+	
+	
+	
     var possibleQueries = deepQueryCreator(baseConfiguration, deepElements);
+	
+
     if(baseConfiguration.extraConfiguration 
         && baseConfiguration.extraConfiguration.HideUnrelateds 
         && baseConfiguration.extraConfiguration.HideUnrelateds === true)
