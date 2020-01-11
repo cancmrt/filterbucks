@@ -31,7 +31,7 @@
 		Extreme
 	</option>
 </select> -->
-<select class="filter1" data-fbdeep="0" multiple>
+<!-- <select class="filter1" data-fbdeep="0" multiple>
 	<option data-fbflush="true" value="none">
 		Select
 	</option>
@@ -55,7 +55,7 @@
 	<option value="Extreme">
 		Extreme
 	</option>
-</select>
+</select> -->
 <!-- <input type="checkbox" class="filter1" data-fbdeep="0" data-fbflush="true" name="filter1"  value="none"/>None
 <input type="checkbox" class="filter1" data-fbdeep="0" name="filter1" value="Ford"/>Ford
 <input type="checkbox" class="filter1" data-fbdeep="0" name="filter1" value="Opel"/>Opel
@@ -76,7 +76,7 @@
 <input type="radio" class="filter1" data-fbdeep="1" name="filter2" value="Comfort"/>Comfort
 <input type="radio" class="filter1" data-fbdeep="1" name="filter2" value="Extreme">Extreme -->
 
-<!-- <button class="filter1 btn btn-primary" data-fbdeep="0" data-fbflush="true" name="filter1" value="none">None</button>
+<button class="filter1 btn btn-primary" data-fbdeep="0" data-fbflush="true" name="filter1" value="none">None</button>
 <button class="filter1 btn btn-primary" data-fbdeep="0" name="filter1" value="Ford">Ford</button>
 <button class="filter1 btn btn-primary" data-fbdeep="0" name="filter1" value="Opel">Opel</button>
 <br/>
@@ -85,7 +85,7 @@
 <button class="filter1 btn btn-primary" data-fbdeep="1" name="filter2" value="Speed">Speed</button>
 <button class="filter1 btn btn-primary" data-fbdeep="1" name="filter2" value="Comfort">Comfort</button>
 <button class="filter1 btn btn-primary" data-fbdeep="1" name="filter2" value="Extreme">Extreme</button>
- -->
+
 <!-- <a href="#" class="filter1 btn btn-primary" data-fbdeep="0" data-fbflush="true" value="none">None</a>
 <a href="#" class="filter1 btn btn-primary" data-fbdeep="0" value="Ford">Ford</a>
 <a href="#" class="filter1 btn btn-primary" data-fbdeep="0" value="Opel">Opel</a>
@@ -114,7 +114,8 @@
     <script>
     jQuery(document).ready(function(){
         $(".filter1").filterbucks({
-			HideUnrelateds:true
+			HideUnrelateds:true,
+			ButtonCssOpacity:true,
 		});
     });
     </script>

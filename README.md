@@ -287,8 +287,8 @@ Optional Parameters:
 
 **On filtered Elements:**
 
- - filtebucksFilteredHide class added on hiding elements
- - filtebucksFilteredShow class added on showing elements
+ - filterbucksFilteredHide class added on hiding elements
+ - filterbucksFilteredShow class added on showing elements
 
 **On related filter elements:**
 
