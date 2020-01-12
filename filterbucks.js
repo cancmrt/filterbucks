@@ -1,21 +1,30 @@
 function filterbucksEngine(event) {
 
+    
 
     var baseConfiguration = event.data;
+
     var eventFocusItem = this;
+
+    filterbucksStartEvent(baseConfiguration,eventFocusItem);
 
     if (baseConfiguration.type == "button" || baseConfiguration.type == "a") {
 
         buttonInitSelector(baseConfiguration,eventFocusItem);
 
     }
+    else{
+        jQuery(baseConfiguration.parents).removeClass(baseConfiguration.filterTargetElementClass);
+        jQuery(eventFocusItem).addClass(baseConfiguration.filterTargetElementClass);
+    }
     var uniqueDeeps = giveUniqDeepCounts(baseConfiguration);
+    var allUniqueDeeps = allUniqDeepCounts(baseConfiguration);
     flusher(baseConfiguration,uniqueDeeps,eventFocusItem);
     var deepElements = giveDeepElements(baseConfiguration,uniqueDeeps);
     var possibleQueries = deepQueryCreator(baseConfiguration, deepElements);
     if(hasHideUnrelateds(baseConfiguration))
     {
-        filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeeps, possibleQueries);
+        filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeeps,allUniqueDeeps, possibleQueries);
     }
     var classQuery = possibleQueryGenerator(baseConfiguration, possibleQueries);
     jQuery(baseConfiguration.baseClass).css("display", "none");
@@ -26,8 +35,17 @@ function filterbucksEngine(event) {
     jQuery(classQuery).removeClass(baseConfiguration.filterHideClass);
     jQuery(classQuery).addClass(baseConfiguration.filterShowClass);
 
+    filterbucksEndEvent(baseConfiguration,eventFocusItem);
+
 }
 
+
+function filterbucksStartEvent(baseConfiguration,eventFocusItem){
+    jQuery(baseConfiguration.parents).trigger(baseConfiguration.filterStartEvent,eventFocusItem);
+}
+function filterbucksEndEvent(baseConfiguration,eventFocusItem){
+    jQuery(baseConfiguration.parents).trigger(baseConfiguration.filterEndEvent,eventFocusItem);
+}
 function hasButtonCssOpacity(baseConfiguration){
     if(
         baseConfiguration.extraConfiguration && 
@@ -99,6 +117,30 @@ function giveUniqDeepCounts(baseConfiguration)
             if (detectCheckSelector.length > 0) {
                 findedDeeps.push(parseInt(jQuery(this).data(baseConfiguration.dataDeepProp), 10));
             }
+        }
+
+
+    });
+
+    var uniqueDeeps = findedDeeps.filter(function (elem, index, self) {
+        return index === self.indexOf(elem);
+    });
+
+    uniqueDeeps = uniqueDeeps.sort(function (a, b) { return a - b });
+
+    return uniqueDeeps;
+}
+function allUniqDeepCounts(baseConfiguration)
+{
+
+   var findedDeeps = [];
+
+    jQuery(baseConfiguration.parents).each(function (index) {
+        if (baseConfiguration.type == "select") {
+            findedDeeps.push(parseInt(jQuery(this).data(baseConfiguration.dataDeepProp), 10));
+        }
+        else if (baseConfiguration.type == "radio" || baseConfiguration.type == "checkbox" || baseConfiguration.type == "button" || baseConfiguration.type == "a") {
+            findedDeeps.push(parseInt(jQuery(this).data(baseConfiguration.dataDeepProp), 10));
         }
 
 
@@ -219,7 +261,7 @@ function possibleQueryGenerator(baseConfiguration, possibleQueries) {
 
     return classQuery;
 }
-function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeeps, possibleQueries) {
+function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeeps,allUniqueDeeps, possibleQueries) {
     var deepCount = parseInt(jQuery(eventFocusItem).data(baseConfiguration.dataDeepProp), 10);
     var couldntFind = [];
     if (deepCount != deepElements.length) {
@@ -289,9 +331,13 @@ function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeep
                                 findedAny = true;
                             }
                         });
-                        if (!findedAny) {
+                        if (!findedAny && possibleQueries.length > 0) {
+                            jQuery(this).removeClass(baseConfiguration.relatedFilterShowClass);
+                            jQuery(this).removeClass(baseConfiguration.relatedFilterHideClass);
+                            jQuery(this).addClass(baseConfiguration.relatedFilterHideClass);
                             jQuery(this).hide();
                         }
+                        
                         findedAny = false;
                     }
 
@@ -300,17 +346,27 @@ function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeep
         }
 
     }
-    if (deepCount == 0) {
-        uniqueDeeps.forEach(deep => {
+    
+    if(deepElements.length <= 0)
+    {
+        allUniqueDeeps.forEach(deep => {
             if (baseConfiguration.type == "select") {
                 var unSortedDeep = jQuery(baseConfiguration.parents).filter("[data-" + baseConfiguration.dataDeepProp + "='" + deep + "']");
                 jQuery(unSortedDeep).find("option").each(function () {
+
+                    jQuery(this).removeClass(baseConfiguration.relatedFilterShowClass);
+                    jQuery(this).removeClass(baseConfiguration.relatedFilterHideClass);
+                    jQuery(this).addClass(baseConfiguration.relatedFilterShowClass);
                     jQuery(this).show();
+
                 });
             }
             else if (baseConfiguration.type == "radio" || baseConfiguration.type == "checkbox" || baseConfiguration.type == "button" || baseConfiguration.type == "a") {
                 var unSortedDeep = jQuery(baseConfiguration.parents).filter("[data-" + baseConfiguration.dataDeepProp + "='" + deep + "']");
                 jQuery(unSortedDeep).each(function () {
+                    jQuery(this).removeClass(baseConfiguration.relatedFilterShowClass);
+                    jQuery(this).removeClass(baseConfiguration.relatedFilterHideClass);
+                    jQuery(this).addClass(baseConfiguration.relatedFilterShowClass);
                     jQuery(this).show();
                 });
             }
@@ -370,6 +426,8 @@ jQuery.fn.filterbucks = function (extraConfiguration) {
         filterShowClass:"filtebucksFilteredShow",
         filterHideClass:"filtebucksFilteredHide",
         filterTargetElementClass:"filterbucksSelected",
+        filterStartEvent:"filterbucks-start",
+        filterEndEvent:"filterbucks-end",
         type: jQuery(this)[0].tagName == "INPUT" ? jQuery(this)[0].type.toLowerCase() : jQuery(this)[0].tagName.toLowerCase(),
         extraConfiguration:extraConfiguration
     }

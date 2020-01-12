@@ -4,9 +4,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 
-<script src="filterbucks.js"></script>
+<script src="../filterbucks.js"></script>
 
-<!-- <select class="filter1" data-fbdeep="0">
+<select class="filter1" data-fbdeep="0">
 	<option data-fbflush="true" value="none">
 		Select
 	</option>
@@ -30,7 +30,7 @@
 	<option value="Extreme">
 		Extreme
 	</option>
-</select> -->
+</select>
 <!-- <select class="filter1" data-fbdeep="0" multiple>
 	<option data-fbflush="true" value="none">
 		Select
@@ -76,7 +76,7 @@
 <input type="radio" class="filter1" data-fbdeep="1" name="filter2" value="Comfort"/>Comfort
 <input type="radio" class="filter1" data-fbdeep="1" name="filter2" value="Extreme">Extreme -->
 
-<button class="filter1 btn btn-primary" data-fbdeep="0" data-fbflush="true" name="filter1" value="none">None</button>
+<!-- <button class="filter1 btn btn-primary" data-fbdeep="0" data-fbflush="true" name="filter1" value="none">None</button>
 <button class="filter1 btn btn-primary" data-fbdeep="0" name="filter1" value="Ford">Ford</button>
 <button class="filter1 btn btn-primary" data-fbdeep="0" name="filter1" value="Opel">Opel</button>
 <br/>
@@ -84,7 +84,7 @@
 <button class="filter1 btn btn-primary" data-fbdeep="1" data-fbflush="true" name="filter2" value="none">None</button>
 <button class="filter1 btn btn-primary" data-fbdeep="1" name="filter2" value="Speed">Speed</button>
 <button class="filter1 btn btn-primary" data-fbdeep="1" name="filter2" value="Comfort">Comfort</button>
-<button class="filter1 btn btn-primary" data-fbdeep="1" name="filter2" value="Extreme">Extreme</button>
+<button class="filter1 btn btn-primary" data-fbdeep="1" name="filter2" value="Extreme">Extreme</button> -->
 
 <!-- <a href="#" class="filter1 btn btn-primary" data-fbdeep="0" data-fbflush="true" value="none">None</a>
 <a href="#" class="filter1 btn btn-primary" data-fbdeep="0" value="Ford">Ford</a>
@@ -116,6 +116,12 @@
         $(".filter1").filterbucks({
 			HideUnrelateds:true,
 			ButtonCssOpacity:true,
+		});
+		$(".filter1").on("filterbucks-start",function(){
+			console.log("Start!");
+		});
+		$(".filter1").on("filterbucks-end",function(){
+			console.log("End!");
 		});
     });
     </script>
