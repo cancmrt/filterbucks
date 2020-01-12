@@ -178,7 +178,6 @@ Comfort
 <button class="filter btn btn-primary" data-fbdeep="1" value="Comfort">Comfort</button>
 ```
 
-
 **Example for a tag:**
 
 ```html
@@ -229,9 +228,18 @@ jQuery(document).ready(function(){
 	    });
  });
 ```
-
-
 Let me explain to you, You have Ford and Opel both of them Speed and Comfort model but somehow Ford have one more model, let's say that model name is Extreme. Opel definitely doesn't have this model, when we select Opel option, Model options filtered too and Extreme option will be deleted! When we select Ford again, Extreme option will come again.
+
+## How can i open opacity options for buttons and a tags
+
+This option can be use, when you want to see selected buttons or a tags. By default this property closed. If you want style to selected button or a tag you can use **filterbucksSelected** class. If you want to open auto opacity for selected buttons or a tags. You can configure settings something like this.
+
+```javascript
+$(".filter1").filterbucks({
+		ButtonCssOpacity:true
+});
+```
+
 
 ## **Properties**
 
@@ -287,10 +295,44 @@ Optional Parameters:
 
 **On filtered Elements:**
 
- - filtebucksFilteredHide class added on hiding elements
- - filtebucksFilteredShow class added on showing elements
+ - filterbucksFilteredHide class added on hiding elements
+ - filterbucksFilteredShow class added on showing elements
 
 **On related filter elements:**
 
- - filterbuckRelatedHide class added on hiding elements
- - filterbuckRelatedShow class added on showing elements
+ - filterbucksRelatedHide class added on hiding elements
+ - filterbucksRelatedShow class added on showing elements
+
+**On selected element:**
+- filterbucksSelected class added on selected filter element
+
+## **Events**
+
+Filterbucks has a two events 
+
+- Filterbucks Start Event
+- Filterbucks End Event
+
+**Filterbucks Start Event**
+
+This event when occur begginnig of filter process.
+You can use like this:
+
+```javascript
+$(".filter").on("filterbucks-start",function(){
+		console.log("Start!");
+});
+```
+**Filterbucks End Event**
+
+This event when occur end of filterprocess.
+You can use like this:
+
+```javascript
+$(".filter").on("filterbucks-end",function(){
+		console.log("End!");
+});
+```
+
+
+

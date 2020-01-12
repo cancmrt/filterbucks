@@ -1,17 +1,110 @@
 function filterbucksEngine(event) {
-    var findedDeeps = [];
+
+    
+
     var baseConfiguration = event.data;
+
     var eventFocusItem = this;
+
+    filterbucksStartEvent(baseConfiguration,eventFocusItem);
+
     if (baseConfiguration.type == "button" || baseConfiguration.type == "a") {
-        if (jQuery(eventFocusItem).is("[" + baseConfiguration.buttonCheckSelector + "]")) {
-            jQuery(eventFocusItem).removeAttr(baseConfiguration.buttonCheckSelector);
-            jQuery(eventFocusItem).css("opacity", "1");
-        }
-        else {
-            jQuery(eventFocusItem).attr(baseConfiguration.buttonCheckSelector, "");
-            jQuery(eventFocusItem).css("opacity", "0.5");
-        }
+
+        buttonInitSelector(baseConfiguration,eventFocusItem);
+
     }
+    else{
+        jQuery(baseConfiguration.parents).removeClass(baseConfiguration.filterTargetElementClass);
+        jQuery(eventFocusItem).addClass(baseConfiguration.filterTargetElementClass);
+    }
+    var uniqueDeeps = giveUniqDeepCounts(baseConfiguration);
+    var allUniqueDeeps = allUniqDeepCounts(baseConfiguration);
+    flusher(baseConfiguration,uniqueDeeps,eventFocusItem);
+    var deepElements = giveDeepElements(baseConfiguration,uniqueDeeps);
+    var possibleQueries = deepQueryCreator(baseConfiguration, deepElements);
+    if(hasHideUnrelateds(baseConfiguration))
+    {
+        filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeeps,allUniqueDeeps, possibleQueries);
+    }
+    var classQuery = possibleQueryGenerator(baseConfiguration, possibleQueries);
+    jQuery(baseConfiguration.baseClass).css("display", "none");
+    jQuery(baseConfiguration.baseClass).removeClass(baseConfiguration.filterShowClass);
+    jQuery(baseConfiguration.baseClass).removeClass(baseConfiguration.filterHideClass);
+    jQuery(baseConfiguration.baseClass).addClass(baseConfiguration.filterHideClass);
+    jQuery(classQuery).css("display", "");
+    jQuery(classQuery).removeClass(baseConfiguration.filterHideClass);
+    jQuery(classQuery).addClass(baseConfiguration.filterShowClass);
+
+    filterbucksEndEvent(baseConfiguration,eventFocusItem);
+
+}
+
+
+function filterbucksStartEvent(baseConfiguration,eventFocusItem){
+    jQuery(baseConfiguration.parents).trigger(baseConfiguration.filterStartEvent,eventFocusItem);
+}
+function filterbucksEndEvent(baseConfiguration,eventFocusItem){
+    jQuery(baseConfiguration.parents).trigger(baseConfiguration.filterEndEvent,eventFocusItem);
+}
+function hasButtonCssOpacity(baseConfiguration){
+    if(
+        baseConfiguration.extraConfiguration && 
+        baseConfiguration.extraConfiguration.ButtonCssOpacity && 
+        baseConfiguration.extraConfiguration.ButtonCssOpacity === true
+        )
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+function hasHideUnrelateds(baseConfiguration){
+    if(baseConfiguration.extraConfiguration 
+        && baseConfiguration.extraConfiguration.HideUnrelateds 
+        && baseConfiguration.extraConfiguration.HideUnrelateds === true)
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+
+}
+function buttonInitSelector(baseConfiguration,eventFocusItem)
+{
+    if (jQuery(eventFocusItem).is("[" + baseConfiguration.buttonCheckSelector + "]")) {
+
+        buttonSelectorRemove(baseConfiguration,eventFocusItem);
+    }
+    else {
+        
+        buttonSelectorAdd(baseConfiguration,eventFocusItem);
+    }
+}
+function buttonSelectorRemove(baseConfiguration,item)
+{
+    jQuery(item).removeAttr(baseConfiguration.buttonCheckSelector);
+    jQuery(item).removeClass(baseConfiguration.filterTargetElementClass);
+
+    if (hasButtonCssOpacity(baseConfiguration))
+    {
+        jQuery(item).css("opacity", "1");
+    }
+}
+function buttonSelectorAdd(baseConfiguration,item){
+    jQuery(item).attr(baseConfiguration.buttonCheckSelector, "");
+    jQuery(item).addClass(baseConfiguration.filterTargetElementClass);
+    if (hasButtonCssOpacity(baseConfiguration))
+    {
+        jQuery(item).css("opacity", "0.5");
+    }
+}
+function giveUniqDeepCounts(baseConfiguration)
+{
+
+   var findedDeeps = [];
+
     jQuery(baseConfiguration.parents).each(function (index) {
         if (baseConfiguration.type == "select") {
             var detectCheckSelector = $(this).find(baseConfiguration.checkSelector)
@@ -28,27 +121,41 @@ function filterbucksEngine(event) {
 
 
     });
+
     var uniqueDeeps = findedDeeps.filter(function (elem, index, self) {
         return index === self.indexOf(elem);
     });
+
     uniqueDeeps = uniqueDeeps.sort(function (a, b) { return a - b });
-	
-	var deepCount = parseInt(jQuery(eventFocusItem).data(baseConfiguration.dataDeepProp), 10);
-	uniqueDeeps.forEach(deep =>{
-		
-		if(deepCount < deep){
-			var flushThis = jQuery(baseConfiguration.parents).filter("[data-" + baseConfiguration.dataDeepProp + "='" + deep + "']");
-			
-			if (baseConfiguration.type == "select") {
-				jQuery(flushThis).val($(this).find('option:first').val());
-			}
-			
-			
-		}
-	});
-	
-	
-	
+
+    return uniqueDeeps;
+}
+function allUniqDeepCounts(baseConfiguration)
+{
+
+   var findedDeeps = [];
+
+    jQuery(baseConfiguration.parents).each(function (index) {
+        if (baseConfiguration.type == "select") {
+            findedDeeps.push(parseInt(jQuery(this).data(baseConfiguration.dataDeepProp), 10));
+        }
+        else if (baseConfiguration.type == "radio" || baseConfiguration.type == "checkbox" || baseConfiguration.type == "button" || baseConfiguration.type == "a") {
+            findedDeeps.push(parseInt(jQuery(this).data(baseConfiguration.dataDeepProp), 10));
+        }
+
+
+    });
+
+    var uniqueDeeps = findedDeeps.filter(function (elem, index, self) {
+        return index === self.indexOf(elem);
+    });
+
+    uniqueDeeps = uniqueDeeps.sort(function (a, b) { return a - b });
+
+    return uniqueDeeps;
+}
+function giveDeepElements(baseConfiguration, uniqueDeeps)
+{
     var deepElements = [];
     uniqueDeeps.forEach(deep => {
 
@@ -59,33 +166,83 @@ function filterbucksEngine(event) {
         else if (baseConfiguration.type == "radio" || baseConfiguration.type == "checkbox" || baseConfiguration.type == "button" || baseConfiguration.type == "a") {
             var findedDeep = jQuery(baseConfiguration.parents).filter(baseConfiguration.checkSelector).filter("[data-" + baseConfiguration.dataDeepProp + "='" + deep + "']");
         }
-        jQuery(findedDeep !== null && jQuery(findedDeeps).length > 0)
+        jQuery(findedDeep !== null && jQuery(findedDeep).length > 0)
         {
             deepElements.push(findedDeep);
         }
     });
-	
-	
-	
-	
-    var possibleQueries = deepQueryCreator(baseConfiguration, deepElements);
-	
 
-    if(baseConfiguration.extraConfiguration 
-        && baseConfiguration.extraConfiguration.HideUnrelateds 
-        && baseConfiguration.extraConfiguration.HideUnrelateds === true)
+    return deepElements;
+
+}
+function flusher(baseConfiguration,uniqueDeeps,eventFocusItem) {
+    var deepCount = parseInt(jQuery(eventFocusItem).data(baseConfiguration.dataDeepProp), 10);
+    var realDeepCount = parseInt(jQuery(eventFocusItem).data(baseConfiguration.dataDeepProp), 10);
+    
+    if (hasFlushProp(baseConfiguration, eventFocusItem))
     {
-        filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeeps, possibleQueries);
+        deepCount--;
     }
-    var classQuery = possibleQueryGenerator(baseConfiguration, possibleQueries);
-    jQuery(baseConfiguration.baseClass).css("display", "none");
-    jQuery(baseConfiguration.baseClass).removeClass(baseConfiguration.filterShowClass);
-    jQuery(baseConfiguration.baseClass).removeClass(baseConfiguration.filterHideClass);
-    jQuery(baseConfiguration.baseClass).addClass(baseConfiguration.filterHideClass);
-    jQuery(classQuery).css("display", "");
-    jQuery(classQuery).removeClass(baseConfiguration.filterHideClass);
-    jQuery(classQuery).addClass(baseConfiguration.filterShowClass);
+	uniqueDeeps.forEach(deep =>{
+		
+		if(deepCount < deep){
 
+            var flushThis = jQuery(baseConfiguration.parents).filter("[data-" + baseConfiguration.dataDeepProp + "='" + deep + "']");
+
+			if (baseConfiguration.type == "select") {
+                jQuery(flushThis).find("option").each(function(){
+                    if(hasFlushProp(baseConfiguration,this))
+                    {
+                        jQuery(flushThis).val($(this).val());
+                    }
+                });
+            }
+            else if (baseConfiguration.type == "button" || baseConfiguration.type == "a") {
+                jQuery(flushThis).each(function(){
+
+                    if(hasFlushProp(baseConfiguration,this) && realDeepCount !== deep)
+                    {
+                        buttonSelectorAdd(baseConfiguration,this);
+                    }
+
+                    if(!hasFlushProp(baseConfiguration,this))
+                    {
+                        buttonSelectorRemove(baseConfiguration,this);
+                    }
+                });
+            }
+			else if (baseConfiguration.type == "radio" || baseConfiguration.type == "checkbox") {
+                jQuery(flushThis).each(function(){
+
+                    if(hasFlushProp(baseConfiguration,this) && realDeepCount !== deep)
+                    {
+                        jQuery(this).prop("checked", true);
+                    }
+
+                    if(!hasFlushProp(baseConfiguration,this))
+                    {
+                        jQuery(this).prop("checked", false);
+                    }
+                });
+                
+            }
+			
+		}
+	});
+	
+}
+function hasFlushProp(baseConfiguration,item)
+{
+    if (
+        (jQuery(item).attr("data-" + baseConfiguration.dataFlushProp)) && 
+        (jQuery(item).attr("data-" + baseConfiguration.dataFlushProp) === "true")
+        )
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 function possibleQueryGenerator(baseConfiguration, possibleQueries) {
     var classQuery = "";
@@ -104,7 +261,7 @@ function possibleQueryGenerator(baseConfiguration, possibleQueries) {
 
     return classQuery;
 }
-function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeeps, possibleQueries) {
+function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeeps,allUniqueDeeps, possibleQueries) {
     var deepCount = parseInt(jQuery(eventFocusItem).data(baseConfiguration.dataDeepProp), 10);
     var couldntFind = [];
     if (deepCount != deepElements.length) {
@@ -118,9 +275,9 @@ function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeep
                 jQuery(this).show();
             });
             var selectedElement = jQuery(eventFocusItem).find(baseConfiguration.checkSelector);
-            if (!(jQuery(selectedElement).attr("data-" + baseConfiguration.dataFlushProp)) || (jQuery(selectedElement).attr("data-" + baseConfiguration.dataFlushProp) !== "true")) {
+            if (!hasFlushProp(baseConfiguration,selectedElement)) {
                 jQuery(unSortedDeep).find("option").each(function () {
-                    if (!(jQuery(this).attr("data-" + baseConfiguration.dataFlushProp)) || (jQuery(this).attr("data-" + baseConfiguration.dataFlushProp) !== "true")) {
+                    if (!hasFlushProp(baseConfiguration,this)) {
                         var unSelectedValue = jQuery(this).val();
                         var findedAny = false;
                         possibleQueries.forEach(value => {
@@ -155,9 +312,9 @@ function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeep
                 selectedElement = jQuery(baseConfiguration.parents).filter(baseConfiguration.checkSelector).filter("[data-" + baseConfiguration.dataDeepProp + "='" + deepCount + "']");
             }
 
-            if (!(jQuery(selectedElement).attr("data-" + baseConfiguration.dataFlushProp)) || (jQuery(selectedElement).attr("data-" + baseConfiguration.dataFlushProp) !== "true")) {
+            if (!hasFlushProp(baseConfiguration,selectedElement)) {
                 jQuery(unSortedDeep).each(function () {
-                    if (!(jQuery(this).attr("data-" + baseConfiguration.dataFlushProp)) || (jQuery(this).attr("data-" + baseConfiguration.dataFlushProp) !== "true")) {
+                    if (!hasFlushProp(baseConfiguration,this)) {
                         var unSelectedValue = undefined;
                         if (baseConfiguration.type === "a") {
                             unSelectedValue = jQuery(this).attr("value");
@@ -174,9 +331,13 @@ function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeep
                                 findedAny = true;
                             }
                         });
-                        if (!findedAny) {
+                        if (!findedAny && possibleQueries.length > 0) {
+                            jQuery(this).removeClass(baseConfiguration.relatedFilterShowClass);
+                            jQuery(this).removeClass(baseConfiguration.relatedFilterHideClass);
+                            jQuery(this).addClass(baseConfiguration.relatedFilterHideClass);
                             jQuery(this).hide();
                         }
+                        
                         findedAny = false;
                     }
 
@@ -185,17 +346,27 @@ function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeep
         }
 
     }
-    if (deepCount == 0) {
-        uniqueDeeps.forEach(deep => {
+    
+    if(deepElements.length <= 0)
+    {
+        allUniqueDeeps.forEach(deep => {
             if (baseConfiguration.type == "select") {
                 var unSortedDeep = jQuery(baseConfiguration.parents).filter("[data-" + baseConfiguration.dataDeepProp + "='" + deep + "']");
                 jQuery(unSortedDeep).find("option").each(function () {
+
+                    jQuery(this).removeClass(baseConfiguration.relatedFilterShowClass);
+                    jQuery(this).removeClass(baseConfiguration.relatedFilterHideClass);
+                    jQuery(this).addClass(baseConfiguration.relatedFilterShowClass);
                     jQuery(this).show();
+
                 });
             }
             else if (baseConfiguration.type == "radio" || baseConfiguration.type == "checkbox" || baseConfiguration.type == "button" || baseConfiguration.type == "a") {
                 var unSortedDeep = jQuery(baseConfiguration.parents).filter("[data-" + baseConfiguration.dataDeepProp + "='" + deep + "']");
                 jQuery(unSortedDeep).each(function () {
+                    jQuery(this).removeClass(baseConfiguration.relatedFilterShowClass);
+                    jQuery(this).removeClass(baseConfiguration.relatedFilterHideClass);
+                    jQuery(this).addClass(baseConfiguration.relatedFilterShowClass);
                     jQuery(this).show();
                 });
             }
@@ -241,7 +412,6 @@ function deepQueryCreator(baseConfiguration, deepElements, queries = null) {
 
 
 }
-
 jQuery.fn.filterbucks = function (extraConfiguration) {
     var baseConfiguration = {
         parents: this,
@@ -255,6 +425,9 @@ jQuery.fn.filterbucks = function (extraConfiguration) {
         relatedFilterHideClass: "filterbucksRelatedHide",
         filterShowClass:"filtebucksFilteredShow",
         filterHideClass:"filtebucksFilteredHide",
+        filterTargetElementClass:"filterbucksSelected",
+        filterStartEvent:"filterbucks-start",
+        filterEndEvent:"filterbucks-end",
         type: jQuery(this)[0].tagName == "INPUT" ? jQuery(this)[0].type.toLowerCase() : jQuery(this)[0].tagName.toLowerCase(),
         extraConfiguration:extraConfiguration
     }
