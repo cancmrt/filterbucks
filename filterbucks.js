@@ -1,6 +1,6 @@
 function filterbucksEngine(event) {
 
-    
+    console.log("ddd");
 
     var baseConfiguration = event.data;
 
@@ -157,7 +157,7 @@ function allUniqDeepCounts(baseConfiguration)
 function giveDeepElements(baseConfiguration, uniqueDeeps)
 {
     var deepElements = [];
-    uniqueDeeps.forEach(deep => {
+    uniqueDeeps.forEach(function(deep) {
 
         var findedDeep = null;
         if (baseConfiguration.type == "select") {
@@ -183,7 +183,7 @@ function flusher(baseConfiguration,uniqueDeeps,eventFocusItem) {
     {
         deepCount--;
     }
-	uniqueDeeps.forEach(deep =>{
+	uniqueDeeps.forEach(function(deep){
 		
 		if(deepCount < deep){
 
@@ -253,7 +253,7 @@ function possibleQueryGenerator(baseConfiguration, possibleQueries) {
         classQuery = baseConfiguration.baseClass;
     }
     else if (possibleQueries !== null && possibleQueries.length > 0) {
-        possibleQueries.forEach(value => {
+        possibleQueries.forEach(function(value) {
             classQuery += baseConfiguration.baseClass + value + ","
         });
         classQuery = classQuery.substring(0, classQuery.length - 1);
@@ -280,7 +280,7 @@ function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeep
                     if (!hasFlushProp(baseConfiguration,this)) {
                         var unSelectedValue = jQuery(this).val();
                         var findedAny = false;
-                        possibleQueries.forEach(value => {
+                        possibleQueries.forEach(function(value) {
                             investgatorClass = baseConfiguration.baseClass + value + "." + unSelectedValue;
                             var countOfSelector = jQuery(investgatorClass).length;
                             if (countOfSelector > 0) {
@@ -324,7 +324,7 @@ function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeep
                         }
 
                         var findedAny = false;
-                        possibleQueries.forEach(value => {
+                        possibleQueries.forEach(function(value) {
                             investgatorClass = baseConfiguration.baseClass + value + "." + unSelectedValue;
                             var countOfSelector = jQuery(investgatorClass).length;
                             if (countOfSelector > 0) {
@@ -349,7 +349,7 @@ function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeep
     
     if(deepElements.length <= 0)
     {
-        allUniqueDeeps.forEach(deep => {
+        allUniqueDeeps.forEach(function(deep) {
             if (baseConfiguration.type == "select") {
                 var unSortedDeep = jQuery(baseConfiguration.parents).filter("[data-" + baseConfiguration.dataDeepProp + "='" + deep + "']");
                 jQuery(unSortedDeep).find("option").each(function () {
@@ -374,7 +374,11 @@ function filterHider(baseConfiguration, deepElements, eventFocusItem, uniqueDeep
     }
     return couldntFind;
 }
-function deepQueryCreator(baseConfiguration, deepElements, queries = null) {
+function deepQueryCreator(baseConfiguration, deepElements, queries) {
+	
+	if(queries === undefined) {
+      queries = null;
+    }
 
     if (deepElements.length === 0) {
         return queries;
@@ -395,7 +399,7 @@ function deepQueryCreator(baseConfiguration, deepElements, queries = null) {
 
             }
             else if (queries.length > 0) {
-                queries.forEach(query => {
+                queries.forEach(function(query) {
                     var classValue = "." + jQuery(element).attr("value");
                     var newQuery = query + classValue;
                     extendQueries.push(newQuery);
@@ -445,6 +449,7 @@ jQuery.fn.filterbucksRunner = function (baseConfiguration) {
     if (baseConfiguration.type === "radio" || baseConfiguration.type === "checkbox") {
         baseConfiguration.checkSelector = ":checked";
     }
+	console.log(baseConfiguration);
     this.on(baseConfiguration.event, baseConfiguration, filterbucksEngine);
 
 
