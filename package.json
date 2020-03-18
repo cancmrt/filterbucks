@@ -22,5 +22,11 @@
   "bugs": {
     "url": "https://github.com/cancmrt/filterbucks/issues"
   },
-  "homepage": "https://github.com/cancmrt/filterbucks/blob/master/README.md"
+  "homepage": "https://github.com/cancmrt/filterbucks/blob/master/README.md",
+  "devDependencies": {
+    "@types/jquery": "^3.3.33"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
 }
