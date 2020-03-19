@@ -40,7 +40,7 @@ Or you can access directly by browser:
 https://unpkg.com/filterbucks@1.x.x/filterbucks.min.js
 
 
-  
+
   
 
 ## **How filterbucks working?**
@@ -229,6 +229,22 @@ jQuery(document).ready(function(){
  });
 ```
 Let me explain to you, You have Ford and Opel both of them Speed and Comfort model but somehow Ford have one more model, let's say that model name is Extreme. Opel definitely doesn't have this model, when we select Opel option, Model options filtered too and Extreme option will be deleted! When we select Ford again, Extreme option will come again.
+
+## How can i do single selection on buttons and a tags
+
+In default our filterbucks levels(fb-deep) have multiple selection on each filterbucks level(fb-deep)
+
+If you want to single selection on button or a tags on each filterbuck level(fb-deep), you should use BtnSingleChoise option on filterbucks creation.
+
+```javascript
+jQuery(document).ready(function(){
+	    $(".filter1").filterbucks({
+		    BtnSingleChoise:true
+	    });
+ });
+```
+
+With these choise now you have single select on each filterbucks level(fb-deep).
 
 ## How can i open opacity options for buttons and a tags
 

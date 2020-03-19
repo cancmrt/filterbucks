@@ -1,7 +1,5 @@
 function filterbucksEngine(event) {
 
-    console.log("ddd");
-
     var baseConfiguration = event.data;
 
     var eventFocusItem = this;
@@ -71,15 +69,44 @@ function hasHideUnrelateds(baseConfiguration){
     }
 
 }
+function hasBtnSingleChoise(baseConfiguration){
+    if(baseConfiguration.extraConfiguration 
+        && baseConfiguration.extraConfiguration.BtnSingleChoise 
+        && baseConfiguration.extraConfiguration.BtnSingleChoise === true)
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+
+}
 function buttonInitSelector(baseConfiguration,eventFocusItem)
 {
-    if (jQuery(eventFocusItem).is("[" + baseConfiguration.buttonCheckSelector + "]")) {
-
-        buttonSelectorRemove(baseConfiguration,eventFocusItem);
-    }
-    else {
+    if(hasBtnSingleChoise(baseConfiguration))
+    {
+        var selectedDeepCount = jQuery(eventFocusItem).data(baseConfiguration.dataDeepProp);
+        var alreadySelectedBtn = jQuery(baseConfiguration.parents).filter("[" + baseConfiguration.buttonCheckSelector + "]").filter('[data-'+baseConfiguration.dataDeepProp+' = "'+selectedDeepCount+'"]');
+        if(alreadySelectedBtn.length == 1)
+        {
+            buttonSelectorRemove(baseConfiguration,alreadySelectedBtn);
+            buttonSelectorAdd(baseConfiguration,eventFocusItem);
+        }
+        else if(alreadySelectedBtn.length < 1)
+        {
+            buttonSelectorAdd(baseConfiguration,eventFocusItem);
+        }
         
-        buttonSelectorAdd(baseConfiguration,eventFocusItem);
+    }
+    else{
+        if (jQuery(eventFocusItem).is("[" + baseConfiguration.buttonCheckSelector + "]")) {
+
+            buttonSelectorRemove(baseConfiguration,eventFocusItem);
+        }
+        else {
+            
+            buttonSelectorAdd(baseConfiguration,eventFocusItem);
+        }
     }
 }
 function buttonSelectorRemove(baseConfiguration,item)
