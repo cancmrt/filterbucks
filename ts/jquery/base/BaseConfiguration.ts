@@ -1,5 +1,5 @@
 
-export class Base {
+export class BaseConfiguration {
 
 
     BaseClass:string;
@@ -27,12 +27,26 @@ export class Base {
         this.Event = "change";
         this.RelatedFilterShowClass = "filterbucksRelatedShow";
         this.RelatedFilterHideClass = "filterbucksRelatedHide";
-        this.FilterShowClass = "filtebucksFilteredShow";
-        this.FilterHideClass = "filtebucksFilteredHide";
+        this.FilterShowClass = "filterbucksFilteredShow";
+        this.FilterHideClass = "filterbucksFilteredHide";
         this.FilterTargetElementClass = "filterbucksSelected";
         this.FilterStartEvent = "filterbucks-start";
         this.FilterEndEvent = "filterbucks-end";
         this.Type = jQuery(Parents).get(0).tagName == "INPUT" ? jQuery(Parents).get(0).attr("type").toLowerCase() : jQuery(Parents).get(0).tagName.toLowerCase();
+
+        if (this.Type === "button" || this.Type === "a") {
+            this.Event = "click";
+            this.CheckSelector = "[clicked]";
+        }
+        if (this.Type === "select") {
+            this.CheckSelector = "option:selected";
+        }
+        if (this.Type === "radio" || this.Type === "checkbox") {
+            this.CheckSelector = ":checked";
+        }
+
+
+
     }
 
 }
