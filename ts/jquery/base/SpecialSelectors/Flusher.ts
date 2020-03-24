@@ -35,7 +35,7 @@ export class Flusher {
                     jQuery(FlushThis).find("option").each(function(){
                         if(OurChecker.HasFlushProp(this))
                         {
-                            jQuery(FlushThis).val($(this).val());
+                            jQuery(FlushThis).val(jQuery(this).val() as string);
                         }
                     });
                 }
