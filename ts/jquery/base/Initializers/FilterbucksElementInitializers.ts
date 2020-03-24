@@ -1,5 +1,5 @@
 import jQuery from "jquery";
-import { BaseConfiguration } from "../BaseConfiguration";
+import { BaseConfiguration } from "../Configurations/BaseConfiguration";
 import { ExtraConfigurationChecker } from "../Checks/ExtraConfigurationChecker";
 import { ButtonSelector } from "../SpecialSelectors/ButtonSelector";
 

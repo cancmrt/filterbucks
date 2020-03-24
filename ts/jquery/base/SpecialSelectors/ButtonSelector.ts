@@ -1,17 +1,17 @@
 import jQuery from "jquery";
-import { BaseConfiguration } from "../BaseConfiguration";
+import { BaseConfiguration } from "../Configurations/BaseConfiguration";
 import { ExtraConfigurationChecker } from "../Checks/ExtraConfigurationChecker";
 
 export class ButtonSelector {
 
     private Checker:ExtraConfigurationChecker
 
-    constructor(private Configuration:BaseConfiguration, private FocusedItem:JQuery<HTMLFormElement>)
+    constructor(private Configuration:BaseConfiguration, private FocusedItem:JQuery<HTMLFormElement> | HTMLFormElement)
     {
         this.Checker = new ExtraConfigurationChecker(Configuration);
     }
-    ButtonSelectorAdd(FocusThis?:JQuery<HTMLFormElement>):void{
-        let FocusDecided:JQuery<HTMLFormElement>;
+    ButtonSelectorAdd(FocusThis?:JQuery<HTMLFormElement> | HTMLFormElement):void{
+        let FocusDecided:JQuery<HTMLFormElement> | HTMLFormElement;
         if(FocusThis !== undefined)
         {
             FocusDecided = FocusThis;
@@ -27,8 +27,8 @@ export class ButtonSelector {
         }
     }
     
-    ButtonSelectorRemove(FocusThis?:JQuery<HTMLFormElement>):void{
-        let FocusDecided:JQuery<HTMLFormElement>;
+    ButtonSelectorRemove(FocusThis?:JQuery<HTMLFormElement> | HTMLFormElement):void{
+        let FocusDecided:JQuery<HTMLFormElement> | HTMLFormElement;
         if(FocusThis !== undefined)
         {
             FocusDecided = FocusThis;

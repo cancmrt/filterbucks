@@ -1,5 +1,5 @@
 import jQuery from "jquery";
-import {BaseConfiguration} from "../BaseConfiguration";
+import {BaseConfiguration} from "../Configurations/BaseConfiguration";
 export class ExtraConfigurationChecker
 {
     constructor(private Configuration:BaseConfiguration)
@@ -44,7 +44,7 @@ export class ExtraConfigurationChecker
         }
     
     }
-    public HasFlushProp(Item:JQuery<HTMLFormElement>)
+    public HasFlushProp(Item:JQuery<HTMLFormElement> | HTMLFormElement)
     {
         if (
             (jQuery(Item).attr("data-" + this.Configuration.DataFlushProp)) && 

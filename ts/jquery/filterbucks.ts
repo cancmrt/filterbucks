@@ -1,7 +1,7 @@
 ///<reference path="filterbucks.d.ts"/>
 
 import jQuery from "jquery";
-import {BaseConfiguration} from "./base/BaseConfiguration";
+import {BaseConfiguration} from "./base/Configurations/BaseConfiguration";
 import {Engine} from "./base/Engine";
 
 jQuery.fn.filterbucks = function(ExtraConfiguration:any)

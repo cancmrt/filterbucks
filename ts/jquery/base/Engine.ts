@@ -1,7 +1,9 @@
 
-import {BaseConfiguration} from "./BaseConfiguration";
+import {BaseConfiguration} from "./Configurations/BaseConfiguration";
 import {FilterbucksEvents} from "./Events/FilterbucksEvents";
 import {FilterbucksElementInitializers} from "./Initializers/FilterbucksElementInitializers";
+import {DeepCounter} from "./Counters/DeepCounter";
+import {Flusher} from "./SpecialSelectors/Flusher";
 
 export class Engine
 {
@@ -9,6 +11,8 @@ export class Engine
     private FocusedItem:JQuery<HTMLFormElement> | undefined;
     private EventTriggers:FilterbucksEvents | undefined;
     private Initializer:FilterbucksElementInitializers | undefined;
+    private Counter:DeepCounter | undefined;
+    private Flusher:Flusher | undefined;
 
     public Run(Event:any): void {
 
@@ -20,9 +24,20 @@ export class Engine
 
         this.Initializer = new FilterbucksElementInitializers(this.Configuration, this.FocusedItem);
 
+        this.Counter = new DeepCounter(this.Configuration)
+
         this.EventTriggers.FilterbucksStartEvent();
         
         this.Initializer.InitializeElement();
+
+        let SelectedDeeps = this.Counter.SelectedElementsDeeps();
+        let AllDeeps = this.Counter.AllElementsDeep();
+
+        this.Flusher = new Flusher(this.Configuration,SelectedDeeps,this.FocusedItem);
+
+        this.Flusher.Flush();
+
+
 
     }
 }
