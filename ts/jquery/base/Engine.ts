@@ -4,6 +4,7 @@ import {FilterbucksEvents} from "./Events/FilterbucksEvents";
 import {FilterbucksElementInitializers} from "./Initializers/FilterbucksElementInitializers";
 import {DeepCounter} from "./Counters/DeepCounter";
 import {Flusher} from "./SpecialSelectors/Flusher";
+import {DeepElementSelector} from "./SpecialSelectors/DeepElementSelector";
 
 export class Engine
 {
@@ -34,6 +35,10 @@ export class Engine
         let AllDeeps = this.Counter.AllElementsDeep();
 
         this.Flusher = new Flusher(this.Configuration,SelectedDeeps,this.FocusedItem);
+
+        let DeepSelector = new DeepElementSelector(this.Configuration,SelectedDeeps);
+
+        let DeepElements = DeepSelector.GetDeepElements();
 
         this.Flusher.Flush();
 
