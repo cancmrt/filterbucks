@@ -1,3 +1,4 @@
+import jQuery from "jquery";
 import {BaseConfiguration} from "../Configurations/BaseConfiguration";
 
 export class DeepElementSelector
@@ -6,7 +7,7 @@ export class DeepElementSelector
     {
 
     }
-    public GetDeepElements(){
+    public GetDeepElements():Array<JQuery<HTMLFormElement>>{
         let DeepElements:Array<JQuery<HTMLFormElement>> = [];
         let OurConfiguration = this.Configuration;
         this.UniqueDeeps.forEach(function(deep) {

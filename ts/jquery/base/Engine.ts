@@ -5,6 +5,8 @@ import {FilterbucksElementInitializers} from "./Initializers/FilterbucksElementI
 import {DeepCounter} from "./Counters/DeepCounter";
 import {Flusher} from "./SpecialSelectors/Flusher";
 import {DeepElementSelector} from "./SpecialSelectors/DeepElementSelector";
+import {QueryEngine} from "./Query/QueryEngine";
+import {FilterHiderInitializers} from "./Initializers/FilterHiderInitializers";
 
 export class Engine
 {
@@ -42,7 +44,12 @@ export class Engine
 
         this.Flusher.Flush();
 
+        let QueryGenerator = new QueryEngine(this.Configuration);
+        let Hider = new FilterHiderInitializers(this.Configuration);
 
+        let PossibleQueries = QueryGenerator.DeepQueryGenerator(DeepElements);
+
+        Hider.RunHider(DeepElements,this.FocusedItem,AllDeeps,PossibleQueries);
 
     }
 }
