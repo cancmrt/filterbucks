@@ -23,6 +23,16 @@ export class FilterbucksElementInitializers
             this.FormElementInitializer();
         }
     }
+    public InitializeQuery(Query:string):void
+    {
+        jQuery(this.Configuration.BaseClass).css("display", "none");
+        jQuery(this.Configuration.BaseClass).removeClass(this.Configuration.FilterShowClass);
+        jQuery(this.Configuration.BaseClass).removeClass(this.Configuration.FilterHideClass);
+        jQuery(this.Configuration.BaseClass).addClass(this.Configuration.FilterHideClass);
+        jQuery(Query).css("display", "");
+        jQuery(Query).removeClass(this.Configuration.FilterHideClass);
+        jQuery(Query).addClass(this.Configuration.FilterShowClass);
+    }
     private ButtonInitializer():void
     {
         if(this.Checker.HasBtnSingleChoise())

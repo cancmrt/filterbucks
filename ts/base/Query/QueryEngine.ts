@@ -43,4 +43,23 @@ export class QueryEngine{
 
         return this.DeepQueryGenerator(CopyDeepElements, ExtendQueries);
     }
+    public CssQueryGenerator(PossibleQueries:Array<string>):string
+    {
+        var ClassQuery = "";
+        if (PossibleQueries === null) {
+            ClassQuery = this.Configuration.BaseClass;
+        }
+        else if (PossibleQueries.length <= 0) {
+            ClassQuery = this.Configuration.BaseClass;
+        }
+        else if (PossibleQueries !== null && PossibleQueries.length > 0) {
+            let OurConfiguration = this.Configuration;
+            PossibleQueries.forEach(function(value) {
+                ClassQuery += OurConfiguration.BaseClass + value + ","
+            });
+            ClassQuery = ClassQuery.substring(0, ClassQuery.length - 1);
+        }
+
+        return ClassQuery;
+    }
 }

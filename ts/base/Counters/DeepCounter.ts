@@ -12,15 +12,15 @@ export class DeepCounter{
 
         let FindedDeeps: Array<number> = [];
         let OurConfiguration = this.Configuration;
-        jQuery(OurConfiguration.Parents).each(function (index) {
+        jQuery(OurConfiguration.Parents).each(function () {
             if (OurConfiguration.Type == "select") {
-                let DetectedCheckSelector = $(this).find(OurConfiguration.CheckSelector)
+                let DetectedCheckSelector = jQuery(this).find(OurConfiguration.CheckSelector)
                 if (DetectedCheckSelector.length > 0) {
                     FindedDeeps.push(parseInt(jQuery(DetectedCheckSelector).data(OurConfiguration.DataDeepProp), 10));
                 }
             }
             else if (OurConfiguration.Type == "radio" || OurConfiguration.Type == "checkbox" || OurConfiguration.Type == "button" || OurConfiguration.Type == "a") {
-                var DetectedCheckSelector = $(this).filter(OurConfiguration.CheckSelector)
+                var DetectedCheckSelector = jQuery(this).filter(OurConfiguration.CheckSelector)
                 if (DetectedCheckSelector.length > 0) {
                     FindedDeeps.push(parseInt(jQuery(DetectedCheckSelector).data(OurConfiguration.DataDeepProp), 10));
                 }
@@ -41,7 +41,7 @@ export class DeepCounter{
 
         let FindedDeeps:Array<number> = [];
         let OurConfiguration = this.Configuration;
-        jQuery(OurConfiguration.Parents).each(function (index) {
+        jQuery(OurConfiguration.Parents).each(function () {
             if (OurConfiguration.Type == "select") {
                 FindedDeeps.push(parseInt(jQuery(this).data(OurConfiguration.DataDeepProp), 10));
             }

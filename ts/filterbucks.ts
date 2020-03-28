@@ -4,6 +4,9 @@ import jQuery from "jquery";
 import {BaseConfiguration} from "./base/Configurations/BaseConfiguration";
 import {Engine} from "./base/Engine";
 
+
+
+
 jQuery.fn.filterbucks = function(ExtraConfiguration:any)
 {
     let base = new BaseConfiguration(this as JQuery<HTMLFormElement>,ExtraConfiguration);
@@ -21,4 +24,5 @@ jQuery.fn.filterbucks = function(ExtraConfiguration:any)
     var filterbucksEngine = new Engine();
 
     this.on(base.Event, base, filterbucksEngine.Run);
-}
+
+};

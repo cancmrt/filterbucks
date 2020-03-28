@@ -4,7 +4,10 @@
   "description": "Filterbucks is JQuery plugin which blazingly fast for filter operations based on using class selectors.",
   "main": "filterbucks.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rimraf compiled-js && rimraf js",
+    "build": "npm run compile && npm run bundle",
+    "compile": "tsc -p ts/tsconfig.json",
+    "bundle": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -24,7 +27,15 @@
   },
   "homepage": "https://github.com/cancmrt/filterbucks/blob/master/README.md",
   "devDependencies": {
-    "@types/jquery": "^3.3.33"
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-external-helpers": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@types/jquery": "^3.3.33",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.2.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-sourcemaps": "^0.5.0",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
     "jquery": "^3.4.1"
