@@ -42,6 +42,7 @@ export class QueryEngine{
 
 
         return this.DeepQueryGenerator(CopyDeepElements, ExtendQueries);
+        
     }
     public CssQueryGenerator(PossibleQueries:Array<string>):string
     {

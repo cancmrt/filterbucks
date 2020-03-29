@@ -33,11 +33,11 @@ export class Engine
 
         let FlushFilter = new Flusher(Configuration,SelectedDeeps,FocusedItem);
 
+        FlushFilter.Flush();
+
         let DeepSelector = new DeepElementSelector(Configuration,SelectedDeeps);
 
         let DeepElements = DeepSelector.GetDeepElements();
-
-        FlushFilter.Flush();
 
         let QueryGenerator = new QueryEngine(Configuration);
         let Hider = new FilterHiderInitializers(Configuration);

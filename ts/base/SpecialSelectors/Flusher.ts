@@ -18,7 +18,7 @@ export class Flusher {
     public Flush():void{
         let DeepCount = parseInt(jQuery(this.FocusedItem).data(this.Configuration.DataDeepProp), 10);
         let RealDeepCount = parseInt(jQuery(this.FocusedItem).data(this.Configuration.DataDeepProp), 10);
-        
+
         if (this.Checker.HasFlushProp(this.FocusedItem))
         {
             DeepCount--;

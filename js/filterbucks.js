@@ -1,7 +1,7 @@
-(function (jQuery$1) {
+(function (jQuery) {
   'use strict';
 
-  jQuery$1 = jQuery$1 && Object.prototype.hasOwnProperty.call(jQuery$1, 'default') ? jQuery$1['default'] : jQuery$1;
+  jQuery = jQuery && Object.prototype.hasOwnProperty.call(jQuery, 'default') ? jQuery['default'] : jQuery;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -43,7 +43,7 @@
     this.FilterTargetElementClass = "filterbucksSelected";
     this.FilterStartEvent = "filterbucks-start";
     this.FilterEndEvent = "filterbucks-end";
-    this.Type = jQuery(Parents).get(0).tagName == "INPUT" ? jQuery(Parents).get(0).attr("type").toLowerCase() : jQuery(Parents).get(0).tagName.toLowerCase();
+    this.Type = jQuery(Parents).get(0).tagName == "INPUT" ? jQuery(Parents).prop("type").toLowerCase() : jQuery(Parents).get(0).tagName.toLowerCase();
 
     if (this.Type === "button" || this.Type === "a") {
       this.Event = "click";
@@ -70,12 +70,12 @@
     _createClass(FilterbucksEvents, [{
       key: "FilterbucksStartEvent",
       value: function FilterbucksStartEvent() {
-        jQuery$1(this.Configuration.Parents).trigger(this.Configuration.FilterStartEvent, this.FocusedItem);
+        jQuery(this.Configuration.Parents).trigger(this.Configuration.FilterStartEvent, this.FocusedItem);
       }
     }, {
       key: "FilterbucksEndEvent",
       value: function FilterbucksEndEvent() {
-        jQuery$1(this.Configuration.Parents).trigger(this.Configuration.FilterEndEvent, this.FocusedItem);
+        jQuery(this.Configuration.Parents).trigger(this.Configuration.FilterEndEvent, this.FocusedItem);
       }
     }]);
 
@@ -119,7 +119,7 @@
     }, {
       key: "HasFlushProp",
       value: function HasFlushProp(Item) {
-        if (jQuery$1(Item).attr("data-" + this.Configuration.DataFlushProp) && jQuery$1(Item).attr("data-" + this.Configuration.DataFlushProp) === "true") {
+        if (jQuery(Item).attr("data-" + this.Configuration.DataFlushProp) && jQuery(Item).attr("data-" + this.Configuration.DataFlushProp) === "true") {
           return true;
         } else {
           return false;
@@ -150,11 +150,11 @@
           FocusDecided = this.FocusedItem;
         }
 
-        jQuery$1(FocusDecided).attr(this.Configuration.ButtonCheckSelector, "");
-        jQuery$1(FocusDecided).addClass(this.Configuration.FilterTargetElementClass);
+        jQuery(FocusDecided).attr(this.Configuration.ButtonCheckSelector, "");
+        jQuery(FocusDecided).addClass(this.Configuration.FilterTargetElementClass);
 
         if (this.Checker.HasButtonCssOpacity()) {
-          jQuery$1(FocusDecided).css("opacity", "0.5");
+          jQuery(FocusDecided).css("opacity", "0.5");
         }
       }
     }, {
@@ -168,11 +168,11 @@
           FocusDecided = this.FocusedItem;
         }
 
-        jQuery$1(FocusDecided).removeAttr(this.Configuration.ButtonCheckSelector);
-        jQuery$1(FocusDecided).removeClass(this.Configuration.FilterTargetElementClass);
+        jQuery(FocusDecided).removeAttr(this.Configuration.ButtonCheckSelector);
+        jQuery(FocusDecided).removeClass(this.Configuration.FilterTargetElementClass);
 
         if (this.Checker.HasButtonCssOpacity()) {
-          jQuery$1(FocusDecided).css("opacity", "1");
+          jQuery(FocusDecided).css("opacity", "1");
         }
       }
     }]);
@@ -202,20 +202,20 @@
     }, {
       key: "InitializeQuery",
       value: function InitializeQuery(Query) {
-        jQuery$1(this.Configuration.BaseClass).css("display", "none");
-        jQuery$1(this.Configuration.BaseClass).removeClass(this.Configuration.FilterShowClass);
-        jQuery$1(this.Configuration.BaseClass).removeClass(this.Configuration.FilterHideClass);
-        jQuery$1(this.Configuration.BaseClass).addClass(this.Configuration.FilterHideClass);
-        jQuery$1(Query).css("display", "");
-        jQuery$1(Query).removeClass(this.Configuration.FilterHideClass);
-        jQuery$1(Query).addClass(this.Configuration.FilterShowClass);
+        jQuery(this.Configuration.BaseClass).css("display", "none");
+        jQuery(this.Configuration.BaseClass).removeClass(this.Configuration.FilterShowClass);
+        jQuery(this.Configuration.BaseClass).removeClass(this.Configuration.FilterHideClass);
+        jQuery(this.Configuration.BaseClass).addClass(this.Configuration.FilterHideClass);
+        jQuery(Query).css("display", "");
+        jQuery(Query).removeClass(this.Configuration.FilterHideClass);
+        jQuery(Query).addClass(this.Configuration.FilterShowClass);
       }
     }, {
       key: "ButtonInitializer",
       value: function ButtonInitializer() {
         if (this.Checker.HasBtnSingleChoise()) {
-          var SelectedDeepCount = jQuery$1(this.FocusedItem).data(this.Configuration.DataDeepProp);
-          var AlreadySelectedBtn = jQuery$1(this.Configuration.Parents).filter("[" + this.Configuration.ButtonCheckSelector + "]").filter('[data-' + this.Configuration.DataDeepProp + ' = "' + SelectedDeepCount + '"]');
+          var SelectedDeepCount = jQuery(this.FocusedItem).data(this.Configuration.DataDeepProp);
+          var AlreadySelectedBtn = jQuery(this.Configuration.Parents).filter("[" + this.Configuration.ButtonCheckSelector + "]").filter('[data-' + this.Configuration.DataDeepProp + ' = "' + SelectedDeepCount + '"]');
 
           if (AlreadySelectedBtn.length == 1) {
             this.SpecialSelector.ButtonSelectorRemove(AlreadySelectedBtn);
@@ -224,7 +224,7 @@
             this.SpecialSelector.ButtonSelectorAdd();
           }
         } else {
-          if (jQuery$1(this.FocusedItem).is("[" + this.Configuration.ButtonCheckSelector + "]")) {
+          if (jQuery(this.FocusedItem).is("[" + this.Configuration.ButtonCheckSelector + "]")) {
             this.SpecialSelector.ButtonSelectorRemove();
           } else {
             this.SpecialSelector.ButtonSelectorAdd();
@@ -234,8 +234,8 @@
     }, {
       key: "FormElementInitializer",
       value: function FormElementInitializer() {
-        jQuery$1(this.Configuration.Parents).removeClass(this.Configuration.FilterTargetElementClass);
-        jQuery$1(this.FocusedItem).addClass(this.Configuration.FilterTargetElementClass);
+        jQuery(this.Configuration.Parents).removeClass(this.Configuration.FilterTargetElementClass);
+        jQuery(this.FocusedItem).addClass(this.Configuration.FilterTargetElementClass);
       }
     }]);
 
@@ -254,18 +254,18 @@
       value: function SelectedElementsDeeps() {
         var FindedDeeps = [];
         var OurConfiguration = this.Configuration;
-        jQuery$1(OurConfiguration.Parents).each(function () {
+        jQuery(OurConfiguration.Parents).each(function () {
           if (OurConfiguration.Type == "select") {
-            var _DetectedCheckSelector = jQuery$1(this).find(OurConfiguration.CheckSelector);
+            var DetectCheckSelector = $(this).find(OurConfiguration.CheckSelector);
 
-            if (_DetectedCheckSelector.length > 0) {
-              FindedDeeps.push(parseInt(jQuery$1(_DetectedCheckSelector).data(OurConfiguration.DataDeepProp), 10));
+            if (DetectCheckSelector.length > 0) {
+              FindedDeeps.push(parseInt(jQuery(this).data(OurConfiguration.DataDeepProp), 10));
             }
           } else if (OurConfiguration.Type == "radio" || OurConfiguration.Type == "checkbox" || OurConfiguration.Type == "button" || OurConfiguration.Type == "a") {
-            var DetectedCheckSelector = jQuery$1(this).filter(OurConfiguration.CheckSelector);
+            var _DetectCheckSelector = $(this).filter(OurConfiguration.CheckSelector);
 
-            if (DetectedCheckSelector.length > 0) {
-              FindedDeeps.push(parseInt(jQuery$1(DetectedCheckSelector).data(OurConfiguration.DataDeepProp), 10));
+            if (_DetectCheckSelector.length > 0) {
+              FindedDeeps.push(parseInt(jQuery(this).data(OurConfiguration.DataDeepProp), 10));
             }
           }
         });
@@ -282,11 +282,11 @@
       value: function AllElementsDeep() {
         var FindedDeeps = [];
         var OurConfiguration = this.Configuration;
-        jQuery$1(OurConfiguration.Parents).each(function () {
+        jQuery(OurConfiguration.Parents).each(function () {
           if (OurConfiguration.Type == "select") {
-            FindedDeeps.push(parseInt(jQuery$1(this).data(OurConfiguration.DataDeepProp), 10));
+            FindedDeeps.push(parseInt(jQuery(this).data(OurConfiguration.DataDeepProp), 10));
           } else if (OurConfiguration.Type == "radio" || OurConfiguration.Type == "checkbox" || OurConfiguration.Type == "button" || OurConfiguration.Type == "a") {
-            FindedDeeps.push(parseInt(jQuery$1(this).data(OurConfiguration.DataDeepProp), 10));
+            FindedDeeps.push(parseInt(jQuery(this).data(OurConfiguration.DataDeepProp), 10));
           }
         });
         var uniqueDeeps = FindedDeeps.filter(function (elem, index, self) {
@@ -315,8 +315,8 @@
     _createClass(Flusher, [{
       key: "Flush",
       value: function Flush() {
-        var DeepCount = parseInt(jQuery$1(this.FocusedItem).data(this.Configuration.DataDeepProp), 10);
-        var RealDeepCount = parseInt(jQuery$1(this.FocusedItem).data(this.Configuration.DataDeepProp), 10);
+        var DeepCount = parseInt(jQuery(this.FocusedItem).data(this.Configuration.DataDeepProp), 10);
+        var RealDeepCount = parseInt(jQuery(this.FocusedItem).data(this.Configuration.DataDeepProp), 10);
 
         if (this.Checker.HasFlushProp(this.FocusedItem)) {
           DeepCount--;
@@ -326,16 +326,16 @@
         var OurChecker = this.Checker;
         this.SelectedDeeps.forEach(function (ThisDeep) {
           if (DeepCount < ThisDeep) {
-            var FlushThis = jQuery$1(OurConfiguration.Parents).filter("[data-" + OurConfiguration.DataDeepProp + "='" + ThisDeep + "']");
+            var FlushThis = jQuery(OurConfiguration.Parents).filter("[data-" + OurConfiguration.DataDeepProp + "='" + ThisDeep + "']");
 
             if (OurConfiguration.Type == "select") {
-              jQuery$1(FlushThis).find("option").each(function () {
+              jQuery(FlushThis).find("option").each(function () {
                 if (OurChecker.HasFlushProp(this)) {
-                  jQuery$1(FlushThis).val(jQuery$1(this).val());
+                  jQuery(FlushThis).val(jQuery(this).val());
                 }
               });
             } else if (OurConfiguration.Type == "button" || OurConfiguration.Type == "a") {
-              jQuery$1(FlushThis).each(function () {
+              jQuery(FlushThis).each(function () {
                 var SpeacialBtnSelector = new ButtonSelector(OurConfiguration, this);
 
                 if (OurChecker.HasFlushProp(this) && RealDeepCount !== ThisDeep) {
@@ -347,13 +347,13 @@
                 }
               });
             } else if (OurConfiguration.Type == "radio" || OurConfiguration.Type == "checkbox") {
-              jQuery$1(FlushThis).each(function () {
+              jQuery(FlushThis).each(function () {
                 if (OurChecker.HasFlushProp(this) && RealDeepCount !== ThisDeep) {
-                  jQuery$1(this).prop("checked", true);
+                  jQuery(this).prop("checked", true);
                 }
 
                 if (!OurChecker.HasFlushProp(this)) {
-                  jQuery$1(this).prop("checked", false);
+                  jQuery(this).prop("checked", false);
                 }
               });
             }
@@ -382,12 +382,12 @@
           var FindedDeep;
 
           if (OurConfiguration.Type == "select") {
-            FindedDeep = jQuery$1(OurConfiguration.Parents).filter("[data-" + OurConfiguration.DataDeepProp + "='" + deep + "']").find(OurConfiguration.CheckSelector);
+            FindedDeep = jQuery(OurConfiguration.Parents).filter("[data-" + OurConfiguration.DataDeepProp + "='" + deep + "']").find(OurConfiguration.CheckSelector);
           } else if (OurConfiguration.Type == "radio" || OurConfiguration.Type == "checkbox" || OurConfiguration.Type == "button" || OurConfiguration.Type == "a") {
-            FindedDeep = jQuery$1(OurConfiguration.Parents).filter(OurConfiguration.CheckSelector).filter("[data-" + OurConfiguration.DataDeepProp + "='" + deep + "']");
+            FindedDeep = jQuery(OurConfiguration.Parents).filter(OurConfiguration.CheckSelector).filter("[data-" + OurConfiguration.DataDeepProp + "='" + deep + "']");
           }
 
-          if (FindedDeep !== undefined && jQuery$1(FindedDeep).length > 0) {
+          if (FindedDeep !== undefined && jQuery(FindedDeep).length > 0) {
             DeepElements.push(FindedDeep);
           }
         });
@@ -419,24 +419,24 @@
         var CopyDeepElements = DeepElements.slice();
         var TakenLayer = CopyDeepElements.shift();
         var ExtendQueries = [];
-        var DetectedNone = jQuery$1(TakenLayer).filter("[data-" + this.Configuration.DataFlushProp + "='true']");
+        var DetectedNone = jQuery(TakenLayer).filter("[data-" + this.Configuration.DataFlushProp + "='true']");
 
-        if (jQuery$1(DetectedNone).length <= 0) {
-          jQuery$1(TakenLayer).each(function () {
+        if (jQuery(DetectedNone).length <= 0) {
+          jQuery(TakenLayer).each(function () {
             var element = this;
 
             if (Queries.length == 0) {
-              var classValue = "." + jQuery$1(element).attr("value");
+              var classValue = "." + jQuery(element).attr("value");
               ExtendQueries.push(classValue);
             } else if (Queries.length > 0) {
               Queries.forEach(function (query) {
-                var classValue = "." + jQuery$1(element).attr("value");
+                var classValue = "." + jQuery(element).attr("value");
                 var newQuery = query + classValue;
                 ExtendQueries.push(newQuery);
               });
             }
           });
-        } else if (jQuery$1(DetectedNone).length > 0) {
+        } else if (jQuery(DetectedNone).length > 0) {
           ExtendQueries = Queries;
         }
 
@@ -480,29 +480,29 @@
         if (this.Checker.HasHideUnrelateds()) {
           var OurConfiguration = this.Configuration;
           var OurChecker = this.Checker;
-          var DeepCount = parseInt(jQuery$1(FocusedItem).data(OurConfiguration.DataDeepProp), 10);
+          var DeepCount = parseInt(jQuery(FocusedItem).data(OurConfiguration.DataDeepProp), 10);
 
           if (DeepCount != DeepElements.length) {
             var DiscoverThisDeep = DeepCount + 1;
 
             if (OurConfiguration.Type == "select") {
-              var UnSortedDeep = jQuery$1(OurConfiguration.Parents).filter("[data-" + OurConfiguration.DataDeepProp + "='" + DiscoverThisDeep + "']");
-              jQuery$1(UnSortedDeep).find("option").each(function () {
-                jQuery$1(this).removeClass(OurConfiguration.RelatedFilterShowClass);
-                jQuery$1(this).removeClass(OurConfiguration.RelatedFilterHideClass);
-                jQuery$1(this).addClass(OurConfiguration.RelatedFilterShowClass);
-                jQuery$1(this).show();
+              var UnSortedDeep = jQuery(OurConfiguration.Parents).filter("[data-" + OurConfiguration.DataDeepProp + "='" + DiscoverThisDeep + "']");
+              jQuery(UnSortedDeep).find("option").each(function () {
+                jQuery(this).removeClass(OurConfiguration.RelatedFilterShowClass);
+                jQuery(this).removeClass(OurConfiguration.RelatedFilterHideClass);
+                jQuery(this).addClass(OurConfiguration.RelatedFilterShowClass);
+                jQuery(this).show();
               });
-              var SelectedElement = jQuery$1(FocusedItem).find(OurConfiguration.CheckSelector);
+              var SelectedElement = jQuery(FocusedItem).find(OurConfiguration.CheckSelector);
 
               if (!OurChecker.HasFlushProp(SelectedElement)) {
-                jQuery$1(UnSortedDeep).find("option").each(function () {
+                jQuery(UnSortedDeep).find("option").each(function () {
                   if (!OurChecker.HasFlushProp(this)) {
-                    var UnSelectedValue = jQuery$1(this).val();
+                    var UnSelectedValue = jQuery(this).val();
                     var FindedAny = false;
                     PossibleQueries.forEach(function (value) {
                       var InvestgatorClass = OurConfiguration.BaseClass + value + "." + UnSelectedValue;
-                      var CountOfSelector = jQuery$1(InvestgatorClass).length;
+                      var CountOfSelector = jQuery(InvestgatorClass).length;
 
                       if (CountOfSelector > 0) {
                         FindedAny = true;
@@ -510,10 +510,10 @@
                     });
 
                     if (!FindedAny) {
-                      jQuery$1(this).removeClass(OurConfiguration.RelatedFilterShowClass);
-                      jQuery$1(this).removeClass(OurConfiguration.RelatedFilterHideClass);
-                      jQuery$1(this).addClass(OurConfiguration.RelatedFilterHideClass);
-                      jQuery$1(this).hide();
+                      jQuery(this).removeClass(OurConfiguration.RelatedFilterShowClass);
+                      jQuery(this).removeClass(OurConfiguration.RelatedFilterHideClass);
+                      jQuery(this).addClass(OurConfiguration.RelatedFilterHideClass);
+                      jQuery(this).hide();
                     }
 
                     FindedAny = false;
@@ -521,35 +521,35 @@
                 });
               }
             } else if (OurConfiguration.Type == "radio" || OurConfiguration.Type == "checkbox" || OurConfiguration.Type == "button" || OurConfiguration.Type == "a") {
-              var unSortedDeep = jQuery$1(OurConfiguration.Parents).filter("[data-" + OurConfiguration.DataDeepProp + "='" + DiscoverThisDeep + "']");
-              jQuery$1(unSortedDeep).each(function () {
-                jQuery$1(this).show();
+              var unSortedDeep = jQuery(OurConfiguration.Parents).filter("[data-" + OurConfiguration.DataDeepProp + "='" + DiscoverThisDeep + "']");
+              jQuery(unSortedDeep).each(function () {
+                jQuery(this).show();
               });
               var SelectedItem;
 
               if (OurConfiguration.Type == "radio" || OurConfiguration.Type == "checkbox") {
-                SelectedItem = jQuery$1(FocusedItem);
+                SelectedItem = jQuery(FocusedItem);
               }
 
               if (OurConfiguration.Type == "button" || OurConfiguration.Type == "a") {
-                SelectedItem = jQuery$1(OurConfiguration.Parents).filter(OurConfiguration.CheckSelector).filter("[data-" + OurConfiguration.DataDeepProp + "='" + DeepCount + "']");
+                SelectedItem = jQuery(OurConfiguration.Parents).filter(OurConfiguration.CheckSelector).filter("[data-" + OurConfiguration.DataDeepProp + "='" + DeepCount + "']");
               }
 
               if (!OurChecker.HasFlushProp(SelectedItem)) {
-                jQuery$1(unSortedDeep).each(function () {
+                jQuery(unSortedDeep).each(function () {
                   if (!OurChecker.HasFlushProp(this)) {
                     var UnSelectedValue;
 
                     if (OurConfiguration.Type === "a") {
-                      UnSelectedValue = jQuery$1(this).attr("value");
+                      UnSelectedValue = jQuery(this).attr("value");
                     } else {
-                      UnSelectedValue = jQuery$1(this).val();
+                      UnSelectedValue = jQuery(this).val();
                     }
 
                     var FindedAny = false;
                     PossibleQueries.forEach(function (value) {
                       var InvestgatorClass = OurConfiguration.BaseClass + value + "." + UnSelectedValue;
-                      var CountOfSelector = jQuery$1(InvestgatorClass).length;
+                      var CountOfSelector = jQuery(InvestgatorClass).length;
 
                       if (CountOfSelector > 0) {
                         FindedAny = true;
@@ -557,10 +557,10 @@
                     });
 
                     if (!FindedAny && PossibleQueries.length > 0) {
-                      jQuery$1(this).removeClass(OurConfiguration.RelatedFilterShowClass);
-                      jQuery$1(this).removeClass(OurConfiguration.RelatedFilterHideClass);
-                      jQuery$1(this).addClass(OurConfiguration.RelatedFilterHideClass);
-                      jQuery$1(this).hide();
+                      jQuery(this).removeClass(OurConfiguration.RelatedFilterShowClass);
+                      jQuery(this).removeClass(OurConfiguration.RelatedFilterHideClass);
+                      jQuery(this).addClass(OurConfiguration.RelatedFilterHideClass);
+                      jQuery(this).hide();
                     }
 
                     FindedAny = false;
@@ -573,22 +573,22 @@
           if (DeepElements.length <= 0) {
             AllDeeps.forEach(function (deep) {
               if (OurConfiguration.Type == "select") {
-                var _UnSortedDeep = jQuery$1(OurConfiguration.Parents).filter("[data-" + OurConfiguration.DataDeepProp + "='" + deep + "']");
+                var _UnSortedDeep = jQuery(OurConfiguration.Parents).filter("[data-" + OurConfiguration.DataDeepProp + "='" + deep + "']");
 
-                jQuery$1(_UnSortedDeep).find("option").each(function () {
-                  jQuery$1(this).removeClass(OurConfiguration.RelatedFilterShowClass);
-                  jQuery$1(this).removeClass(OurConfiguration.RelatedFilterHideClass);
-                  jQuery$1(this).addClass(OurConfiguration.RelatedFilterShowClass);
-                  jQuery$1(this).show();
+                jQuery(_UnSortedDeep).find("option").each(function () {
+                  jQuery(this).removeClass(OurConfiguration.RelatedFilterShowClass);
+                  jQuery(this).removeClass(OurConfiguration.RelatedFilterHideClass);
+                  jQuery(this).addClass(OurConfiguration.RelatedFilterShowClass);
+                  jQuery(this).show();
                 });
               } else if (OurConfiguration.Type == "radio" || OurConfiguration.Type == "checkbox" || OurConfiguration.Type == "button" || OurConfiguration.Type == "a") {
-                var _UnSortedDeep2 = jQuery$1(OurConfiguration.Parents).filter("[data-" + OurConfiguration.DataDeepProp + "='" + deep + "']");
+                var _UnSortedDeep2 = jQuery(OurConfiguration.Parents).filter("[data-" + OurConfiguration.DataDeepProp + "='" + deep + "']");
 
-                jQuery$1(_UnSortedDeep2).each(function () {
-                  jQuery$1(this).removeClass(OurConfiguration.RelatedFilterShowClass);
-                  jQuery$1(this).removeClass(OurConfiguration.RelatedFilterHideClass);
-                  jQuery$1(this).addClass(OurConfiguration.RelatedFilterShowClass);
-                  jQuery$1(this).show();
+                jQuery(_UnSortedDeep2).each(function () {
+                  jQuery(this).removeClass(OurConfiguration.RelatedFilterShowClass);
+                  jQuery(this).removeClass(OurConfiguration.RelatedFilterHideClass);
+                  jQuery(this).addClass(OurConfiguration.RelatedFilterShowClass);
+                  jQuery(this).show();
                 });
               }
             });
@@ -617,12 +617,10 @@
         Initializer.InitializeElement();
         var SelectedDeeps = Counter.SelectedElementsDeeps();
         var AllDeeps = Counter.AllElementsDeep();
-        console.log(SelectedDeeps);
-        console.log(AllDeeps);
         var FlushFilter = new Flusher(Configuration, SelectedDeeps, FocusedItem);
+        FlushFilter.Flush();
         var DeepSelector = new DeepElementSelector(Configuration, SelectedDeeps);
         var DeepElements = DeepSelector.GetDeepElements();
-        FlushFilter.Flush();
         var QueryGenerator = new QueryEngine(Configuration);
         var Hider = new FilterHiderInitializers(Configuration);
         var PossibleQueries = QueryGenerator.DeepQueryGenerator(DeepElements);
@@ -636,7 +634,7 @@
     return Engine;
   }();
 
-  jQuery$1.fn.filterbucks = function (ExtraConfiguration) {
+  jQuery.fn.filterbucks = function (ExtraConfiguration) {
     var base = new BaseConfiguration(this, ExtraConfiguration);
 
     if (base.Type === "button" || base.Type === "a") {

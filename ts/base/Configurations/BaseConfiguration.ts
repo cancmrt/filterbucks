@@ -1,4 +1,4 @@
-
+import jQuery from "jquery";
 export class BaseConfiguration {
 
 
@@ -32,8 +32,7 @@ export class BaseConfiguration {
         this.FilterTargetElementClass = "filterbucksSelected";
         this.FilterStartEvent = "filterbucks-start";
         this.FilterEndEvent = "filterbucks-end";
-        this.Type = jQuery(Parents).get(0).tagName == "INPUT" ? jQuery(Parents).get(0).attr("type").toLowerCase() : jQuery(Parents).get(0).tagName.toLowerCase();
-
+        this.Type = jQuery(Parents).get(0).tagName == "INPUT" ? jQuery(Parents).prop("type").toLowerCase() : jQuery(Parents).get(0).tagName.toLowerCase();
         if (this.Type === "button" || this.Type === "a") {
             this.Event = "click";
             this.CheckSelector = "[clicked]";

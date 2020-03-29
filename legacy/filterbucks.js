@@ -17,7 +17,11 @@ function filterbucksEngine(event) {
     }
     var uniqueDeeps = giveUniqDeepCounts(baseConfiguration);
     var allUniqueDeeps = allUniqDeepCounts(baseConfiguration);
+
+
     flusher(baseConfiguration,uniqueDeeps,eventFocusItem);
+
+    
     var deepElements = giveDeepElements(baseConfiguration,uniqueDeeps);
     var possibleQueries = deepQueryCreator(baseConfiguration, deepElements);
     if(hasHideUnrelateds(baseConfiguration))
