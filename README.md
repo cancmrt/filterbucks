@@ -37,7 +37,7 @@ Or you can access directly by browser:
 
   
 
-https://unpkg.com/filterbucks@1.x.x/filterbucks.min.js
+https://unpkg.com/filterbucks@1.x.x/js/filterbucks.min.js
 
 
 
