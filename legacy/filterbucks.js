@@ -17,7 +17,11 @@ function filterbucksEngine(event) {
     }
     var uniqueDeeps = giveUniqDeepCounts(baseConfiguration);
     var allUniqueDeeps = allUniqDeepCounts(baseConfiguration);
+
+
     flusher(baseConfiguration,uniqueDeeps,eventFocusItem);
+
+    
     var deepElements = giveDeepElements(baseConfiguration,uniqueDeeps);
     var possibleQueries = deepQueryCreator(baseConfiguration, deepElements);
     if(hasHideUnrelateds(baseConfiguration))
@@ -193,7 +197,7 @@ function giveDeepElements(baseConfiguration, uniqueDeeps)
         else if (baseConfiguration.type == "radio" || baseConfiguration.type == "checkbox" || baseConfiguration.type == "button" || baseConfiguration.type == "a") {
             var findedDeep = jQuery(baseConfiguration.parents).filter(baseConfiguration.checkSelector).filter("[data-" + baseConfiguration.dataDeepProp + "='" + deep + "']");
         }
-        jQuery(findedDeep !== null && jQuery(findedDeep).length > 0)
+        jQuery(findedDeep !== null && jQuery(findedDeep).length > 0)//suspicion bug
         {
             deepElements.push(findedDeep);
         }

@@ -350,5 +350,20 @@ $(".filter").on("filterbucks-end",function(){
 });
 ```
 
+## Contribute
 
+If you want to contiribute feel free for that.
 
+Filterbucks now working with Typescript.  Clone project and run commands
+
+```
+npm install
+
+npm run build
+```
+
+These commands will do compile bundle and minifier operations.
+
+**Thanks for amazing guide:**
+
+https://github.com/georgwittberger/jquery-plugin-typescript-example
