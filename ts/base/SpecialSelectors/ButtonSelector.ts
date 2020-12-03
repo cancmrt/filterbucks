@@ -19,6 +19,7 @@ export class ButtonSelector {
         else{
             FocusDecided = this.FocusedItem;
         }
+        
         jQuery(FocusDecided).attr(this.Configuration.ButtonCheckSelector, "");
         jQuery(FocusDecided).addClass(this.Configuration.FilterTargetElementClass);
         if (this.Checker.HasButtonCssOpacity())

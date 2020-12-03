@@ -256,6 +256,23 @@ $(".filter1").filterbucks({
 });
 ```
 
+## How can i do default selection on initialize
+
+Firstly you should send extra configuration to filterbucks. This configuration is **ControlInitiazeSelection** you should set it true.
+
+```javascript
+$(".filter1").filterbucks({
+		ControlInitiazeSelection:true
+});
+```
+
+Second you should decide to data which filter on initialize. After decide you put attirubute on html element For example button element, you should put **data-selected="true"** attribute to element thats it filterbucks do the rest.
+
+```html
+
+<button class="filter btn btn-primary" data-fbdeep="0" value="Ford" data-selected="true">Ford</button>
+
+```
 
 ## **Properties**
 
@@ -283,7 +300,13 @@ This element value should be numeric and value range can be 0 to n.
 
 This property looking filter element level and deactivate this level. This element value can be true or false. If you are using true, selected filter element level will be deactivate.
 
-  
+
+>  **data-selected**
+
+
+This property select default element by automaticly and filter elements on initialize. If you use this you should send extra configuration to settings like ControlInitiazeSelection = true
+
+
 
 >  **Other important notes.**
 

@@ -11,7 +11,7 @@ jQuery.fn.filterbucks = function(ExtraConfiguration:any)
 {
     let base = new BaseConfiguration(this as JQuery<HTMLFormElement>,ExtraConfiguration);
     if (base.Type === "button" || base.Type === "a") {
-        base.Event = "click";
+        base.Event = "mousedown";
         base.CheckSelector = "[clicked]";
     }
     if (base.Type === "select") {
@@ -25,4 +25,8 @@ jQuery.fn.filterbucks = function(ExtraConfiguration:any)
 
     this.on(base.Event, base, filterbucksEngine.Run);
 
+    if(ExtraConfiguration.ControlInitiazeSelection && ExtraConfiguration.ControlInitiazeSelection === true){
+        filterbucksEngine.ForceRun(base);
+    }
+    
 };

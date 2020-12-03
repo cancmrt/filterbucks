@@ -10,12 +10,13 @@ export class BaseConfiguration {
     Event:string;
     RelatedFilterShowClass:string;
     RelatedFilterHideClass:string;
-    FilterShowClass:string
-    FilterHideClass:string
-    FilterTargetElementClass:string
-    FilterStartEvent:string
-    FilterEndEvent:string
-    Type:string
+    FilterShowClass:string;
+    FilterHideClass:string;
+    FilterTargetElementClass:string;
+    FilterStartEvent:string;
+    FilterEndEvent:string;
+    Type:string;
+    DefaultSelection:string;
 
     constructor(public Parents:JQuery<HTMLFormElement>, public ExtraConfiguration:any)
     {
@@ -32,6 +33,8 @@ export class BaseConfiguration {
         this.FilterTargetElementClass = "filterbucksSelected";
         this.FilterStartEvent = "filterbucks-start";
         this.FilterEndEvent = "filterbucks-end";
+        this.DefaultSelection = '[data-selected="true"]';
+
         this.Type = jQuery(Parents).get(0).tagName == "INPUT" ? jQuery(Parents).prop("type").toLowerCase() : jQuery(Parents).get(0).tagName.toLowerCase();
         if (this.Type === "button" || this.Type === "a") {
             this.Event = "click";
