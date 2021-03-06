@@ -32,10 +32,19 @@ export class Engine
 
         let SelectedDeeps = Counter.SelectedElementsDeeps();
         let AllDeeps = Counter.AllElementsDeep();
-
         let FlushFilter = new Flusher(Configuration,SelectedDeeps,FocusedItem);
 
-        FlushFilter.Flush();
+        if(Configuration.ExtraConfig && Configuration.ExtraConfig.DisableFlusher && Configuration.ExtraConfig.DisableFlusher === true )
+        {
+
+        }
+        else if(Configuration.ExtraConfig && Configuration.ExtraConfig.DisableFlusher && Configuration.ExtraConfig.DisableFlusher === true)
+        {
+            FlushFilter.Flush();
+        }
+        else{
+            FlushFilter.Flush();
+        }
 
         let DeepSelector = new DeepElementSelector(Configuration,SelectedDeeps);
 

@@ -17,6 +17,7 @@ export class BaseConfiguration {
     FilterEndEvent:string;
     Type:string;
     DefaultSelection:string;
+    ExtraConfig:any;
 
     constructor(public Parents:JQuery<HTMLFormElement>, public ExtraConfiguration:any)
     {
@@ -34,6 +35,7 @@ export class BaseConfiguration {
         this.FilterStartEvent = "filterbucks-start";
         this.FilterEndEvent = "filterbucks-end";
         this.DefaultSelection = '[data-selected="true"]';
+        this.ExtraConfig = ExtraConfiguration;
 
         this.Type = jQuery(Parents).get(0).tagName == "INPUT" ? jQuery(Parents).prop("type").toLowerCase() : jQuery(Parents).get(0).tagName.toLowerCase();
         if (this.Type === "button" || this.Type === "a") {

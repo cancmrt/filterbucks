@@ -44,6 +44,7 @@
     this.FilterStartEvent = "filterbucks-start";
     this.FilterEndEvent = "filterbucks-end";
     this.DefaultSelection = '[data-selected="true"]';
+    this.ExtraConfig = ExtraConfiguration;
     this.Type = jQuery$1(Parents).get(0).tagName == "INPUT" ? jQuery$1(Parents).prop("type").toLowerCase() : jQuery$1(Parents).get(0).tagName.toLowerCase();
 
     if (this.Type === "button" || this.Type === "a") {
@@ -621,7 +622,13 @@
         var SelectedDeeps = Counter.SelectedElementsDeeps();
         var AllDeeps = Counter.AllElementsDeep();
         var FlushFilter = new Flusher(Configuration, SelectedDeeps, FocusedItem);
-        FlushFilter.Flush();
+
+        if (Configuration.ExtraConfig && Configuration.ExtraConfig.DisableFlusher && Configuration.ExtraConfig.DisableFlusher === true) ; else if (Configuration.ExtraConfig && Configuration.ExtraConfig.DisableFlusher && Configuration.ExtraConfig.DisableFlusher === true) {
+          FlushFilter.Flush();
+        } else {
+          FlushFilter.Flush();
+        }
+
         var DeepSelector = new DeepElementSelector(Configuration, SelectedDeeps);
         var DeepElements = DeepSelector.GetDeepElements();
         var QueryGenerator = new QueryEngine(Configuration);

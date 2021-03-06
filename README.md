@@ -274,6 +274,16 @@ Second you should decide to data which filter on initialize. After decide you pu
 
 ```
 
+## How can i disable flusher for everyselection
+
+If you disable flusher for every selection You can use this option. This configuration is **DisableFlusher** you should set it true.
+
+```javascript
+$(".filter1").filterbucks({
+		DisableFlusher:true
+});
+```
+
 ## **Properties**
 
   

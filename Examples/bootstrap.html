@@ -6,8 +6,8 @@
 
 <script src="../js/filterbucks.js"></script>
 
-<select class="filter1" data-fbdeep="0">
-	<option data-fbflush="true" value="none">
+<!--<select class="filter1" data-fbdeep="0">
+	<option  value="none">
 		Select
 	</option>
 	<option value="Ford">
@@ -18,7 +18,7 @@
 	</option>
 </select>
 <select class="filter1" data-fbdeep="1">
-	<option data-fbflush="true" value="none">
+	<option  value="none">
 		Select
 	</option>
 	<option value="Speed">
@@ -30,7 +30,7 @@
 	<option value="Extreme">
 		Extreme
 	</option>
-</select>
+</select>-->
 <!-- <select class="filter1" data-fbdeep="0" multiple>
 	<option data-fbflush="true" value="none">
 		Select
@@ -56,7 +56,7 @@
 		Extreme
 	</option>
 </select> -->
-<!--<input type="checkbox" class="filter1" data-fbdeep="0" data-fbflush="true" name="filter1"  value="none"/>None
+<input type="checkbox" class="filter1" data-fbdeep="0" data-fbflush="true" name="filter1"  value="none"/>None
 <input type="checkbox" class="filter1" data-fbdeep="0" name="filter1" value="Ford"/>Ford
 <input type="checkbox" class="filter1" data-fbdeep="0" name="filter1" value="Opel"/>Opel
 <br/>
@@ -64,7 +64,7 @@
 <input type="checkbox" class="filter1" data-fbdeep="1" data-fbflush="true" name="filter2" value="none"/>None
 <input type="checkbox" class="filter1" data-fbdeep="1" name="filter2" value="Speed"/>Speed
 <input type="checkbox" class="filter1" data-fbdeep="1" name="filter2" value="Comfort"/>Comfort 
-<input type="checkbox" class="filter1" data-fbdeep="1" name="filter2" value="Extreme"/>Extreme-->
+<input type="checkbox" class="filter1" data-fbdeep="1" name="filter2" value="Extreme"/>Extreme
 
 <!--<input type="radio" class="filter1" data-fbdeep="0" data-fbflush="true" name="filter1" value="none"/>None
 <input type="radio" class="filter1" data-fbdeep="0" name="filter1" value="Ford"/>Ford
@@ -114,8 +114,9 @@
     <script>
     jQuery(document).ready(function(){
         $(".filter1").filterbucks({
-			HideUnrelateds:true,
-			ButtonCssOpacity:true
+			//HideUnrelateds:true,
+			ButtonCssOpacity:true,
+			DisableFlusher:true
 		});
 		$(".filter1").on("filterbucks-start",function(){
 			console.log("Start!");
